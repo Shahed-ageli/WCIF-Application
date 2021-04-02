@@ -1,0 +1,63 @@
+name: wcif_application
+description: A new Flutter application.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_feather_icons: ^1.0.3
+  google_fonts: ^2.0.0
+  auto_route: ^0.6.9
+  rxdart: ^0.26.0
+  font_awesome_flutter: ^8.11.0
+  url_launcher: ^6.0.2
+  flutter_svg: ^0.19.3
+  flutter_rating_bar: ^4.0.0
+  dots_indicator: ^1.2.0
+  functional_widget_annotation: ^0.8.0
+  bubble_tab_indicator: ^0.1.5
+  carousel_slider: ^3.0.0
+  animations: ^2.0.0
+
+  provider:
+  http:
+  get:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+
+  assets:
+    - assets/images/
+    - assets/images/categories/
+    - assets/images/drop_images/
+    - assets/images/roam_images/
+    - assets/images/balenciaga_images/
+
+#  fonts:
+#    - family: Try Clother
+#      fonts:
+#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Black.ttf
+#          weight: 500
+#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Bold.ttf
+#          weight: 700
+#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Light.ttf
+#          weight: 300
+#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Regular.ttf
+#          weight: 400
