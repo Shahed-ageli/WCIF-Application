@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import '../view/about_us_screen.dart';
 import '../view/add-edit_question_screen.dart';
 import '../view/categories_screen.dart';
+import '../view/categories_user_screen.dart';
 import '../view/category_questions_screen.dart';
-import '../view/follower_screen.dart';
 import '../view/following_screen.dart';
 import '../view/home_screen.dart';
 import '../view/login_screen.dart';
-import '../view/menu_screen.dart';
+import '../widgets/shared/main_menu.dart';
 import '../view/notification_screen.dart';
 import '../view/profile.dart';
 import '../view/profile_edit_screen.dart';
@@ -42,7 +42,6 @@ class Routes {
   static const String bottomSheet2 = '/bottom-sheet2';
   static const String bottomSheet3 = '/bottom-sheet3';
   static const String bottomSheet4 = '/bottom-sheet4';
-  static const String followerScreen = '/follower-screen';
   static const String followingScreen = '/following-screen';
   static const String categoryQuestionsScreen = '/category-questions-screen';
   static const String questionCategoryScreen = '/question-category-screen';
@@ -59,6 +58,7 @@ class Routes {
   static const String homeScreen = '/home-screen';
   static const String questionDetailsScreen = '/questionDetails-screen';
   static const String categoriesScreen = '/categories-screen';
+  static const String categoriesUserScreen = '/categories-user-screen';
   static const String menuScreen = '/menu-screen';
 
 
@@ -73,7 +73,7 @@ class Routes {
     bottomSheet2,
     bottomSheet3,
     bottomSheet4,
-    followerScreen,
+
     followingScreen,
     categoryQuestionsScreen,
     questionCategoryScreen,
@@ -91,6 +91,7 @@ class Routes {
     homeScreen,
     questionDetailsScreen,
     categoriesScreen,
+    categoriesUserScreen,
     menuScreen,
   };
 }
@@ -109,7 +110,6 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.bottomSheet2, page: BottomSheet2),
     RouteDef(Routes.bottomSheet3, page: BottomSheet3),
     RouteDef(Routes.bottomSheet4, page: BottomSheet4),
-    RouteDef(Routes.followerScreen, page: FollowerScreen),
     RouteDef(Routes.followingScreen, page: FollowingScreen),
     RouteDef(Routes.categoryQuestionsScreen, page: CategoryQuestionsScreen),
     RouteDef(Routes.questionCategoryScreen, page: QuestionCategoryScreen),
@@ -127,7 +127,8 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.homeScreen, page: HomeScreen),
     RouteDef(Routes.questionDetailsScreen, page: QuestionDetailsScreen),
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
-    RouteDef(Routes.menuScreen, page: MenuScreen),
+    RouteDef(Routes.categoriesUserScreen, page: CategoriesUserScreen),
+    RouteDef(Routes.menuScreen, page: MainMenu),
 
   ];
   @override
@@ -192,12 +193,6 @@ class AppRouter extends RouterBase {
       );
     },
 
-    FollowerScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => FollowerScreen(),
-        settings: data,
-      );
-    },
 
     FollowingScreen: (data) {
       return MaterialPageRoute<dynamic>(
@@ -335,9 +330,16 @@ class AppRouter extends RouterBase {
       );
     },
 
-    MenuScreen: (data) {
+    CategoriesUserScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => MenuScreen(),
+        builder: (context) => CategoriesUserScreen(),
+        settings: data,
+      );
+    },
+
+    MainMenu: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => MainMenu(),
         settings: data,
       );
     },

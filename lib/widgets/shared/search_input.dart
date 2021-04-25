@@ -11,6 +11,12 @@ const double kSidePadding = Sizes.PADDING_24;
 const double kButtonWidth = Sizes.WIDTH_56;
 
 class SearchInput extends StatelessWidget {
+  SearchInput({
+    this.onShare,
+  });
+
+  final GestureTapCallback onShare;
+
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
@@ -24,7 +30,7 @@ class SearchInput extends StatelessWidget {
 
           child: CustomTextFormField(
             textFormFieldStyle: theme.textTheme.subtitle1.copyWith(
-              color: AppColors.bluegreen,
+              color: AppColors.moov,
             ),
             hintText: StringConst.SEARCH_HINT_TEXT,
             prefixIconColor: AppColors.primaryColor,

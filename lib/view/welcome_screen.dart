@@ -15,7 +15,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   double currentIndexPage;
   int pageLength;
   List<String> onBoardingImageList = [
-    ImagePath.CARRIBEAN,
+    ImagePath.QQ,
     ImagePath.YOGA_2,
     ImagePath.SUNRISE,
   ];
@@ -67,7 +67,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 dotsCount: pageLength,
                 position: currentIndexPage,
                 decorator: DotsDecorator(
-                  color: AppColors.moov,
+                  color: AppColors.greenblue,
                   activeColor: AppColors.white,
                 ),
               ),
@@ -126,7 +126,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Container(
               height: assignHeight(context: context, fraction: 0.1),
               decoration: BoxDecoration(
-                color: AppColors.moov,
+                color: AppColors.greenblue,
                 borderRadius: BorderRadius.only(
                   topLeft: const Radius.circular(Sizes.RADIUS_60),
                 ),
@@ -139,9 +139,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     title: StringConst.CONTINUE,
                     textStyle: theme.textTheme.subtitle2.copyWith(
                       fontSize: Sizes.HEIGHT_20,
-                      color: AppColors.purpleL,
+                      color: AppColors.white,
                     ),
-                    color: AppColors.moov,
+                    color: AppColors.greenblue,
                     // TODO: action onpressed
                     onPressed: () {
                       ExtendedNavigator.root.push(Routes.loginScreen);
@@ -149,7 +149,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   Icon(
                     Icons.arrow_forward,
-                    color: AppColors.purpleL,
+                    color: AppColors.white,
                   ),
                 ],
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wcif_application/widgets/shared/custom_appbar.dart';
+import 'package:wcif_application/widgets/shared/main_menu.dart';
 import 'package:wcif_application/widgets/shared/saved_paces_card.dart';
 import 'package:wcif_application/widgets/shared/search_input.dart';
 import 'package:wcif_application/widgets/shared/spaces.dart';
@@ -21,6 +22,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           preferredSize: Size.fromHeight(Sizes.HEIGHT_56),
           child: CustomAppBar(),
         ),
+        drawer: MainMenu(),
         body: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: kSidePadding,
@@ -30,14 +32,22 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
+                StringConst.SEARCHCATEGORY,
+                style: theme.textTheme.bodyText1.copyWith(
+                  color: AppColors.greenblue,
+                  fontSize: Sizes.TEXT_SIZE_20,
+                ),
+              ),
+              SpaceH16(),
+              SearchInput(),
+              SpaceH20(),
+              Text(
                 StringConst.CATEGORIES,
                 style: theme.textTheme.headline5.copyWith(
                   color: AppColors.primaryColor,
                   fontSize: Sizes.TEXT_SIZE_28,
                 ),
               ),
-              SpaceH16(),
-              SearchInput(),
               SpaceH20(),
               TabBar(
                 labelColor: AppColors.primaryColor,
@@ -50,10 +60,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: [
                   Tab(
-                    text: StringConst.ATTRACTIONS,
+                    text: StringConst.ALLCATEGORIES,
                   ),
                   Tab(
-                    text: StringConst.HOTELS,
+                    text: StringConst.MODERATORCATEGORIES,
                   ),
                 ],
               ),

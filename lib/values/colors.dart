@@ -14,16 +14,13 @@ class AppColors {
   static const Color pink50 = Color(0xFFD47FA6);
   static const Color violet400 = Color(0xFF241332);
   static const Color violet200 = Color(0xFF352641);
-  static const Color secondaryColor = Color(0xFF206977);
   static const Color accentColor = Color(0xFF2762CB);
   static const Color secondaryColor2 = Color(0xFFC1C1C1);
-
   static const Color purpleL = Color(0xFFa9afb0);
   static const Color purpleH = Color(0xFF73708a);
   static const Color greenblue = Color(0xFF206977);
   static const Color bluegreen = Color(0xFF1d334d);
   static const Color moov = Color(0xFF2b1136);
-
   static const Color accentPurpleColor = Color(0xFF6A53A1);
   static const Color accentPinkColor = Color(0xFFF99BBD);
   static const Color accentDarkGreenColor = Color(0xFF115C49);

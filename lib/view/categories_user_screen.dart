@@ -1,40 +1,22 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import 'package:wcif_application/widgets/shared/custom_appbar.dart';
 import 'package:wcif_application/widgets/shared/main_menu.dart';
+import 'package:wcif_application/widgets/shared/saved_paces_card.dart';
 import 'package:wcif_application/widgets/shared/search_input.dart';
-import 'package:flutter/material.dart';
-import 'package:wcif_application/widgets/shared/custom_button.dart';
-import 'package:wcif_application/widgets/shared/custom_list_tile.dart';
 import 'package:wcif_application/widgets/shared/spaces.dart';
-import 'package:wcif_application/routes/router.gr.dart';
 import 'package:wcif_application/values/values.dart';
 
-class FollowingListItem {
-  FollowingListItem({
-    @required this.title,
-    @required this.imagePath,
-    this.stars,
-  });
-
-  final String title;
-  final String imagePath;
-  final int stars;
+class CategoriesUserScreen extends StatefulWidget {
+  @override
+  _CategoriesUserScreenState createState() => _CategoriesUserScreenState();
 }
 
-class FollowingScreen extends StatelessWidget {
-  List<FollowingListItem> items = [
-    FollowingListItem(
-      title: StringConst.LESLIE,
-      imagePath: ImagePath.LESLIE,
-      stars: 31,
-    ),
-  ];
-
+class _CategoriesUserScreenState extends State<CategoriesUserScreen> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return DefaultTabController(
-      length: 2,
+      length: 1,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(Sizes.HEIGHT_56),
@@ -49,24 +31,23 @@ class FollowingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SpaceH20(),
               Text(
-                StringConst.SEARCHUSER,
+                StringConst.SEARCHCATEGORY,
                 style: theme.textTheme.bodyText1.copyWith(
                   color: AppColors.greenblue,
                   fontSize: Sizes.TEXT_SIZE_20,
                 ),
               ),
-              SpaceH20(),
+              SpaceH16(),
               SearchInput(),
               SpaceH20(),
-             // Text(
-             //      "",
-             //      style: theme.textTheme.bodyText1.copyWith(
-             //        color: AppColors.greenblue,
-             //        fontSize: Sizes.TEXT_SIZE_20,
-             //      ),
-             // ),
+              Text(
+                StringConst.CATEGORIES,
+                style: theme.textTheme.headline5.copyWith(
+                  color: AppColors.primaryColor,
+                  fontSize: Sizes.TEXT_SIZE_28,
+                ),
+              ),
               SpaceH20(),
               TabBar(
                 labelColor: AppColors.primaryColor,
@@ -79,18 +60,14 @@ class FollowingScreen extends StatelessWidget {
                 indicatorSize: TabBarIndicatorSize.label,
                 tabs: [
                   Tab(
-                    text: StringConst.FOLLOWERS,
-                  ),
-                  Tab(
-                    text: StringConst.FOLLOWING,
+                    text: StringConst.ALLCATEGORIES,
                   ),
                 ],
               ),
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildFollowersList(items),
-                    _buildFollowersList(items),
+                    _buildSavedPlacesCards(),
                   ],
                 ),
               ),
@@ -101,16 +78,23 @@ class FollowingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildFollowersList(List<FollowingListItem> itemList) {
+  Widget _buildSavedPlacesCards() {
     return ListView.separated(
-      itemCount: itemList.length,
-      separatorBuilder: (BuildContext context, int index) => Divider(),
+      scrollDirection: Axis.vertical,
+      itemCount: RoamData.savedPlacesItems.length,
+      padding: EdgeInsets.only(top: Sizes.PADDING_16),
+      shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
-        return CustomListTile(
-          title: itemList[index].title,
-          imagePath: itemList[index].imagePath,
-          stars: itemList[index].stars,
+        return SavedPlacesCard(
+          imagePath: RoamData.savedPlacesItems[index].imagePath,
+          title: RoamData.savedPlacesItems[index].title,
+          subtitle: RoamData.savedPlacesItems[index].subtitle,
+          images: RoamData.profileStackedImage,
+          likes: RoamData.savedPlacesItems[index].likes,
         );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return SpaceH16();
       },
     );
   }

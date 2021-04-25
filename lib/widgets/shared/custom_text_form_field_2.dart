@@ -26,13 +26,13 @@ class CustomTextFormField extends StatelessWidget {
   final Widget suffixIcon;
   final int maxLines;
   final bool hasTitle;
-
   final String fieldTitle;
+  final TextEditingController controller;
 
   CustomTextFormField({
     this.hasPrefixIcon = false,
     this.prefixIconImagePath,
-    this.maxLines = 1,
+    this.maxLines,
     this.textFormFieldStyle,
     this.fieldTitleTextStyle,
     this.hintTextStyle,
@@ -53,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.hasSuffixIcon = false,
     this.fieldTitle,
+    this.controller,
   });
 
   @override
@@ -60,7 +61,7 @@ class CustomTextFormField extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     TextStyle titleTextStyle = theme.textTheme.subtitle1;
     TextStyle formTextStyle = theme.textTheme.subtitle1.copyWith(
-      color: AppColors.secondaryColor,
+      color: AppColors.greenblue,
     );
     TextStyle formHintTextStyle = theme.textTheme.bodyText2.copyWith(
       color: AppColors.grey,
@@ -76,6 +77,7 @@ class CustomTextFormField extends StatelessWidget {
               : Empty(),
           TextFormField(
             style: textFormFieldStyle ?? formTextStyle,
+            controller: controller,
             maxLines: maxLines,
             decoration: InputDecoration(
               border: OutlineInputBorder(

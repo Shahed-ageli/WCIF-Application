@@ -14,7 +14,7 @@ class StackedImages extends StatelessWidget {
     this.widthOfImageItem = kWidth,
     this.heightOfImageItem = kHeight,
     this.offset = kOffset,
-    this.color = AppColors.secondaryColor,
+    this.color = AppColors.greenblue,
     this.textColor = AppColors.white,
     this.textSize,
     this.borderRadius = const BorderRadius.all(

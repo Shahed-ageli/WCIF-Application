@@ -6,7 +6,7 @@ import 'themes/theme_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:wcif_application/controllers/user_controller.dart';
 import 'package:wcif_application/public_models/loading.dart';
-import 'package:get/get.dart';
+import 'package:bot_toast/bot_toast.dart';
 
 void main() {
   runApp(start());
@@ -61,6 +61,7 @@ class _startState extends State<start> {
                 initialRoute: Routes.welcomeScreen,
                 observers: [routeObserver],
               ),
+             // BotToastInit(),
             ),
           );
         }

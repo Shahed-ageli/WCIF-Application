@@ -130,6 +130,35 @@ class AnswerPostCard extends StatelessWidget {
                 titleStyle: iconTextStyle,
                 color: iconColor,
               ),
+              PopupMenuButton<int>(
+                icon: Icon(
+                  Icons.menu,
+                  color:iconColor,
+                ),
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 1,
+                    child: Row(
+                      children: [
+                        Icon(Icons.edit,color:AppColors.purpleH),
+                        SpaceW8(),
+                        Text("تعديل"),
+                      ],
+                    ),
+                  ),
+                  PopupMenuItem(
+                    value: 2,
+                    child: Row(
+                      children: [
+                        Icon(Icons.delete,color:AppColors.purpleH),
+                        SpaceW8(),
+                        Text("حذف"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
             ],
           )
         ],

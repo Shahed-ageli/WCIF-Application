@@ -3,12 +3,12 @@ import 'package:auto_route/auto_route_annotations.dart';
 import '../view/about_us_screen.dart';
 import '../view/add-edit_question_screen.dart';
 import '../view/categories_screen.dart';
+import '../view/categories_user_screen.dart';
 import '../view/category_questions_screen.dart';
-import '../view/follower_screen.dart';
 import '../view/following_screen.dart';
 import '../view/home_screen.dart';
 import '../view/login_screen.dart';
-import '../view/menu_screen.dart';
+import '../widgets/shared/main_menu.dart';
 import '../view/notification_screen.dart';
 import '../view/profile.dart';
 import '../view/profile_edit_screen.dart';
@@ -32,7 +32,7 @@ import '../widgets/alert/bottom_sheet_4.dart';
 
 @MaterialAutoRouter(
   routes: <AutoRoute>[
-    MaterialRoute(page: MenuScreen),
+    MaterialRoute(page: MainMenu),
     MaterialRoute(page: AboutUsScreen),
     MaterialRoute(page: AddEditQuestionScreen),
     MaterialRoute(page: AlertDialog1),
@@ -42,7 +42,6 @@ import '../widgets/alert/bottom_sheet_4.dart';
     MaterialRoute(page: BottomSheet2),
     MaterialRoute(page: BottomSheet3),
     MaterialRoute(page: BottomSheet4),
-    MaterialRoute(page: FollowerScreen),
     MaterialRoute(page: FollowingScreen),
     MaterialRoute(page: CategoryQuestionsScreen),
     MaterialRoute(page: QuestionDetailsScreen),
@@ -60,6 +59,7 @@ import '../widgets/alert/bottom_sheet_4.dart';
     MaterialRoute(page: UserSearchResultsScreen),
     MaterialRoute(page: HomeScreen),
     MaterialRoute(page: CategoriesScreen),
+    MaterialRoute(page: CategoriesUserScreen),
 
   ],
 )

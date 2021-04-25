@@ -14,18 +14,16 @@ class InterestItem {
 
 class SelectInterestScreen extends StatelessWidget {
   List<InterestItem> items = [
-    InterestItem(StringConst.NATURE, RoamImagePath.THAILAND),
-    InterestItem(StringConst.SPORT, RoamImagePath.THAILAND),
-    InterestItem(StringConst.FOOD, RoamImagePath.FOOD),
-    InterestItem(StringConst.PEOPLE, RoamImagePath.PEOPLE),
-    InterestItem(StringConst.ADVENTURE, RoamImagePath.GREAT_WALL),
-    InterestItem(StringConst.WILDLIFE, RoamImagePath.WILDLIFE),
-    InterestItem(StringConst.CULTURE, RoamImagePath.VIETNAM_2),
-    InterestItem(StringConst.BEACH, RoamImagePath.BEACHES_BALI),
-    InterestItem(StringConst.MOUNTAIN, RoamImagePath.MOUNTAIN),
-    InterestItem(StringConst.HEALTH, RoamImagePath.URBAN),
-    InterestItem(StringConst.EDUCATION, RoamImagePath.RESORTS),
-    InterestItem(StringConst.ANIMAL, RoamImagePath.RESORTS),
+    InterestItem(StringConst.NATURE, ImagePath.THAILAND),
+    InterestItem(StringConst.FOOD, ImagePath.FOOD),
+    InterestItem(StringConst.PEOPLE, ImagePath.PEOPLE),
+    InterestItem(StringConst.ADVENTURE, ImagePath.GREAT_WALL),
+    InterestItem(StringConst.WILDLIFE, ImagePath.WILDLIFE),
+    InterestItem(StringConst.CULTURE, ImagePath.VIETNAM_2),
+    InterestItem(StringConst.BEACH, ImagePath.BEACHES_BALI),
+    InterestItem(StringConst.MOUNTAIN, ImagePath.MOUNTAIN),
+    InterestItem(StringConst.HEALTH, ImagePath.URBAN),
+    InterestItem(StringConst.EDUCATION, ImagePath.RESORTS),
   ];
 
   @override
@@ -42,20 +40,20 @@ class SelectInterestScreen extends StatelessWidget {
             text: TextSpan(
               text: StringConst.HELLO,
               style: theme.textTheme.bodyText1.copyWith(
-                color: AppColors.secondaryColor,
+                color: AppColors.greenblue,
               ),
               children: <TextSpan>[
                 TextSpan(
                   text: StringConst.KRISTIN,
                   style: theme.textTheme.bodyText1.copyWith(
                     fontWeight: FontWeight.bold,
-                    color: AppColors.secondaryColor,
+                    color: AppColors.greenblue,
                   ),
                 ),
                 TextSpan(
                   text: StringConst.INTEREST,
                   style: theme.textTheme.bodyText1.copyWith(
-                    color: AppColors.secondaryColor,
+                    color: AppColors.greenblue,
                   ),
                 ),
               ],
@@ -77,11 +75,10 @@ class SelectInterestScreen extends StatelessWidget {
           SpaceH24(),
           CustomButton(
             onPressed: () {
-
-              ExtendedNavigator.root.push(Routes.menuScreen);
+              ExtendedNavigator.root.push(Routes.loginScreen);
             },
             height: Sizes.HEIGHT_56,
-            title: StringConst.Conect,
+            title: StringConst.SIGN_IN,
             borderRadius: Sizes.RADIUS_8,
             textStyle: theme.textTheme.subtitle1.copyWith(
               color: AppColors.white,

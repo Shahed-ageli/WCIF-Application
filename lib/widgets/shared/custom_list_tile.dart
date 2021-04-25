@@ -53,7 +53,7 @@ class _CustomListTileState extends State<CustomListTile> {
       title: Text(
         widget.title,
         style: theme.textTheme.subtitle1.copyWith(
-          color: AppColors.secondaryColor,
+          color: AppColors.greenblue,
         ),
       ),
       subtitle: Row(

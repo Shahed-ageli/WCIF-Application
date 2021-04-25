@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wcif_application/values/values.dart';
 
 class LoadingModel extends ChangeNotifier {
   bool load = false;
@@ -51,7 +52,7 @@ class LoadingBox extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    'assets/images/loading.gif',
+                      ImagePath.COMPASS_LOGO,
                   ),
                 ],
               ),

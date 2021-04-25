@@ -35,7 +35,7 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       elevation: 0.0,
       backgroundColor: color,
-      leading: hasLeading ? (leading ?? defaultLeading()) : null,
+     // leading: hasLeading ? (leading ?? defaultLeading()) : null,
       centerTitle: true,
       title: hasTitle
           ? Text(
@@ -54,7 +54,7 @@ class CustomAppBar extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(right: Sizes.PADDING_16),
           child: SvgPicture.asset(
-            RoamImagePath.NOTIFICATION,
+            ImagePath.NOTIFICATION,
             color: trailingColor,
           ),
         ),
@@ -62,16 +62,16 @@ class CustomAppBar extends StatelessWidget {
     ];
   }
 
-  Widget defaultLeading() {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: const EdgeInsets.only(left: Sizes.PADDING_16),
-        child: SvgPicture.asset(
-          RoamImagePath.MENU_ICON,
-          color: leadingColor,
-        ),
-      ),
-    );
-  }
+  // Widget defaultLeading() {
+  //   return InkWell(
+  //     onTap: () {},
+  //     child: Padding(
+  //       padding: const EdgeInsets.only(left: Sizes.PADDING_16),
+  //       child: SvgPicture.asset(
+  //         RoamImagePath.MENU_ICON,
+  //         color: leadingColor,
+  //       ),
+  //     ),
+  //   );
+  // }
 }

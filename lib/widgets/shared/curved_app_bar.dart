@@ -28,8 +28,8 @@ class CurvedAppBar extends StatelessWidget {
     this.topRightRadius = Sizes.RADIUS_0,
     this.bottomRightRadius = Sizes.RADIUS_0,
     this.bottomLeftRadius = Sizes.RADIUS_0,
-    this.mainAxisAlignment = MainAxisAlignment.center,
-    this.crossAxisAlignment = CrossAxisAlignment.center,
+    this.mainAxisAlignment = MainAxisAlignment.spaceAround,
+    this.crossAxisAlignment = CrossAxisAlignment.stretch,
     this.boxShadow,
     this.title,
 });
