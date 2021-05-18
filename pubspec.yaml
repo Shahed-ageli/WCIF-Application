@@ -30,7 +30,6 @@ dependencies:
   carousel_slider: ^3.0.0
   animations: ^2.0.0
   bot_toast: ^3.0.5
-
   provider:
   http:
   get:
@@ -40,24 +39,7 @@ dev_dependencies:
     sdk: flutter
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/images/
-#    - assets/images/categories/
-#    - assets/images/drop_images/
-#    - assets/images/roam_images/
-#    - assets/images/balenciaga_images/
-
-#  fonts:
-#    - family: Try Clother
-#      fonts:
-#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Black.ttf
-#          weight: 500
-#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Bold.ttf
-#          weight: 700
-#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Light.ttf
-#          weight: 300
-#        - asset: assets/fonts/TRY_Clother/TRY_Clother-Regular.ttf
-#          weight: 400

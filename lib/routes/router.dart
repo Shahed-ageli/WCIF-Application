@@ -1,7 +1,8 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:wcif_application/routes/router.gr.dart';
 
 import '../view/about_us_screen.dart';
-import '../view/add-edit_question_screen.dart';
+import '../view/add-question_screen.dart';
 import '../view/categories_screen.dart';
 import '../view/categories_user_screen.dart';
 import '../view/category_questions_screen.dart';
@@ -19,6 +20,7 @@ import '../view/select_interest_screen.dart';
 import '../view/setting_screen.dart';
 import '../view/signup_screen.dart';
 import '../view/user_answers_screen.dart';
+import '../view/user_questions_screen.dart';
 import '../view/user_search_results.dart';
 import '../view/welcome_screen.dart';
 
@@ -34,7 +36,7 @@ import '../widgets/alert/bottom_sheet_4.dart';
   routes: <AutoRoute>[
     MaterialRoute(page: MainMenu),
     MaterialRoute(page: AboutUsScreen),
-    MaterialRoute(page: AddEditQuestionScreen),
+    MaterialRoute(page: AddQuestionScreen),
     MaterialRoute(page: AlertDialog1),
     MaterialRoute(page: AlertDialog2),
     MaterialRoute(page: AlertDialog3),
@@ -56,10 +58,11 @@ import '../widgets/alert/bottom_sheet_4.dart';
     MaterialRoute(page: SettingScreen),
     MaterialRoute(page: SignUpScreen),
     MaterialRoute(page: UserAnswersScreen),
+    MaterialRoute(page: UserQuestionsScreen),
     MaterialRoute(page: UserSearchResultsScreen),
     MaterialRoute(page: HomeScreen),
     MaterialRoute(page: CategoriesScreen),
-    MaterialRoute(page: CategoriesUserScreen),
+    // MaterialRoute(page: CategoriesUserScreen),
 
   ],
 )

@@ -84,7 +84,7 @@ class _BottomSheet1State extends State<BottomSheet1> {
                         guests += 1;
                       });
                     },
-                    backgroundColor: AppColors.purpleL,
+                    backgroundColor: AppColors.greyPurple,
                     child: Icon(
                       Icons.add,
                       color: AppColors.white,
@@ -95,7 +95,7 @@ class _BottomSheet1State extends State<BottomSheet1> {
               Spacer(),
               CustomButton(
                 title: StringConst.NEXT,
-                color: AppColors.primaryColor,
+                color: AppColors.greenblue2,
                 textStyle: theme.textTheme.subtitle2.copyWith(
                   color: AppColors.white,
                 ),

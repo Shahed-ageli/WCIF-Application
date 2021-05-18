@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget {
     this.hasTrailing = true,
     this.hasTitle = false,
     this.onActionTap,
-    this.color = AppColors.primaryColor,
+    this.color = AppColors.greenblue,
     this.trailing,
     this.leadingColor,
     this.trailingColor,
@@ -40,7 +40,11 @@ class CustomAppBar extends StatelessWidget {
       title: hasTitle
           ? Text(
         title,
-        style: theme.textTheme.subtitle1,
+        style: theme.textTheme.subtitle1.copyWith(
+          color: AppColors.white,
+          fontSize: Sizes.TEXT_SIZE_20,
+          fontWeight: FontWeight.bold,
+        ),
       )
           : null,
       actions: hasTrailing ? (trailing ?? defaultTrailing()) : null,
@@ -52,8 +56,8 @@ class CustomAppBar extends StatelessWidget {
       InkWell(
         onTap: () {},
         child: Padding(
-          padding: const EdgeInsets.only(right: Sizes.PADDING_16),
-          child: SvgPicture.asset(
+          padding: const EdgeInsets.all(Sizes.PADDING_10),
+          child: Image.asset(
             ImagePath.NOTIFICATION,
             color: trailingColor,
           ),

@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:wcif_application/controllers/user_controller.dart';
 import 'package:wcif_application/widgets/shared/custom_button.dart';
-import 'package:wcif_application/widgets/shared/spaces.dart';
 import 'package:wcif_application/widgets/layout/adaptive.dart';
 import 'package:wcif_application/values/values.dart';
 
 class CustomListTile extends StatefulWidget {
   CustomListTile({
-    @required this.title,
+    @required this.name,
+    @required this.email,
+    @required this.userId,
+    @required this.follow,
     @required this.imagePath,
-    this.stars = 0,
     this.isFollowing = false,
   });
 
-  final String title;
+  final String name;
+  final String email;
+  final String userId;
+  final UserController follow;
   final String imagePath;
-  final int stars;
   final bool isFollowing;
 
   @override
@@ -51,35 +55,28 @@ class _CustomListTileState extends State<CustomListTile> {
         ),
       ),
       title: Text(
-        widget.title,
+        widget.name,
         style: theme.textTheme.subtitle1.copyWith(
           color: AppColors.greenblue,
+          fontSize: Sizes.TEXT_SIZE_20,
+
         ),
       ),
-      subtitle: Row(
-        children: [
-          Icon(
-            Icons.star,
-            color: AppColors.accentPurpleColor,
-            size: Sizes.ICON_SIZE_14,
-          ),
-          SpaceW4(),
-          Expanded(
-            child: Text(
-              "${widget.stars} ${StringConst.TRAVELLERS_STARS}",
-              style: theme.textTheme.bodyText2.copyWith(
-                color: AppColors.grey,
-              ),
-            ),
-          ),
-        ],
+      subtitle: Text(
+        widget.email,
+        maxLines: 2,
+        style: theme.textTheme.bodyText2.copyWith(
+          color: AppColors.black60,
+          fontWeight: FontWeight.bold,
+          fontSize: Sizes.TEXT_SIZE_14,
+        ),
       ),
       trailing: Container(
         width: assignWidth(context: context, fraction: 0.25),
         height: Sizes.HEIGHT_42,
         child: CustomButton(
           borderRadius: Sizes.RADIUS_8,
-          color: isFollowing ? AppColors.accentColor : AppColors.white,
+          color: isFollowing ? AppColors.greenblue3 : AppColors.white,
           borderSide: isFollowing
               ? Borders.defaultPrimaryBorder
               : BorderSide(
@@ -87,9 +84,8 @@ class _CustomListTileState extends State<CustomListTile> {
             color: AppColors.grey,
           ),
           elevation: Sizes.ELEVATION_0,
-          onPressed: () => _toggleFollowButton(),
-          title:
-          isFollowing ? StringConst.FOLLOWING : StringConst.FOLLOW,
+          onPressed: () => _toggleFollowButton(widget.follow,widget.userId),
+          title: isFollowing ? StringConst.UNFOLLOW : StringConst.FOLLOW,
           textStyle: theme.textTheme.subtitle1.copyWith(
             color: isFollowing ? AppColors.white : AppColors.grey,
             fontSize: Sizes.TEXT_SIZE_12,
@@ -99,7 +95,12 @@ class _CustomListTileState extends State<CustomListTile> {
     );
   }
 
-  void _toggleFollowButton() {
+  void _toggleFollowButton(UserController follow, String Id) {
+    if(isFollowing){
+      follow.unFollowUser(Id);
+    }else{
+      follow.followUser(Id);
+    }
     setState(() {
       isFollowing = !isFollowing;
     });

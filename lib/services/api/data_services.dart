@@ -1,36 +1,30 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 class DataApi {
   String baseUrl = "https://wcif-backend.herokuapp.com/api/";
-  // String baseUrl = "https://wcif-backend.herokuapp.com/api/";
-
-  // Login API
-  Future<dynamic> loginAPI(String email, String password) async {
+  // Login
+  Future<dynamic> login(String email, String password) async {
     try {
       var response = await http.post(Uri.parse(baseUrl + 'auth/login'),
           body: {'Email': email, 'Password': password});
-
       var jsonData = json.decode(response.body);
-      if (jsonData['message'] == "login successfull." && jsonData['user']['UserType']!=0 ) {
+      if (jsonData['message'] == "login successfull." && jsonData['user']['UserType']!= 9) {
         print("welcome User");
         return jsonData;
-      } else if(jsonData['user']['UserType']==0){
+      } else if(jsonData['user']['UserType']==1){
         print("your admin login on dashbord");
       } else{
-        print("wrong login");
+
         return null;
       }
     } on Exception catch (_) {
-      print("error");
       print(_);
       return null;
     }
   }
-
-  // Register API
-  Future<dynamic> registerAPI(String firstName, String lastName, String loginName, String email, String password,String phone) async {
+  // Register
+  Future<dynamic> registration(String firstName, String lastName, String loginName, String email, String password,String phone) async {
     try {
       var response = await http.post(Uri.parse(baseUrl + 'auth/registration'),
           body: {
@@ -40,6 +34,7 @@ class DataApi {
             'Email': email,
             'Password': password,
             'Phone': phone,
+            'UserType': "2",
           });
       var jsonData = json.decode(response.body);
       if ([jsonData['rowsAffected']].length == 1) {
@@ -50,13 +45,11 @@ class DataApi {
         return null;
       }
     } on Exception catch (_) {
-      print("error Register");
-      print(_);
       return null;
     }
   }
-// Get Qustions API
-  Future<dynamic> getQustionsAPI(String token) async {
+// Get Qustions
+  Future<dynamic> getQustions(String token) async {
     try {
       var headers = {
         "Authorization": token,
@@ -71,65 +64,52 @@ class DataApi {
       return null;
     }
   }
-
-  // Get ProfileQustions API
-  Future<dynamic> getQustionsReqAPI(String token) async {
+  // Get Profile Qustions
+  Future<dynamic> getUserQuestions(String token,int id) async {
     try {
-      var headers = {
-        "Authorization": token,
-      };
-      var data =
-      await http.get(Uri.parse(baseUrl + 'question/getRequest'), headers: headers);
-      print(data.statusCode);
-      if (data.statusCode == 200) {
-        return json.decode(data.body);
-      }
-    } on Exception catch (_) {
-      return null;
-    }
-  }
-
-  // Add Qustions API
-  Future<dynamic> AddQustionsAPI(String token,String categoryId,String title, String content) async {
-    try {
-      var headers = {
-        "Authorization": token,
-      };
-      var response = await http.post(Uri.parse(baseUrl + 'question/add'),headers: headers,
-          body: {
-          'CategoryId':"6",
-          'QuestionTitle': title,
-          'QuestionContent': content,
-            //'QuestionImage':null,
-          },
+      var headers = {"Authorization": token,"Content-Type": "application/json"};
+      var body = jsonEncode({"UserId": id.toString()});
+      final encoding = Encoding.getByName('utf-8');
+      var data = await http.post(Uri.parse(baseUrl + 'user/getUserQuestions'),
+          headers: headers,
+          body: body,
+          encoding: encoding,
       );
-
-      print(response.statusCode);
-
-      // var jsonData = json.decode(response.body);
-      // print(jsonData);
-      // if ([jsonData['rowsAffected']].length == 1) {
-      //   print("added");
-      //   return jsonData;
-      // } else {
-      //   print(jsonData);
-      //   return null;
-      // }
+      print(data.statusCode);
+      if (data.statusCode == 200) {
+        print(data.statusCode);
+        return json.decode(data.body);
+      }
     } on Exception catch (_) {
-      print(_);
-      print("error");
       return null;
     }
   }
-
-  // Get Category API
-  Future<dynamic> GetCategoryAPI(String token) async {
+  // Add Qustions
+  Future<dynamic> addQustion(String token,String title, String content) async {
     try {
-      var headers = {
-        "Authorization": token,
-      };
-      var data =
-      await http.get(Uri.parse(baseUrl + 'category/get'), headers: headers);
+      var headers = {"Authorization": token,"Content-Type": "application/json"};
+      var body = jsonEncode({
+        'CategoryId':"6",
+        'QuestionTitle': title,
+        'QuestionContent': content,
+        'QuestionImage':null,
+      });
+      final encoding = Encoding.getByName('utf-8');
+      var response = await http.post(Uri.parse(baseUrl + 'question/add'),
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
+      print(response.statusCode);
+    } on Exception catch (_) {
+      return null;
+    }
+  }
+  // Get Category
+  Future<dynamic> getCategory(String token) async {
+    try {
+      var headers = {"Authorization": token,};
+      var data = await http.get(Uri.parse(baseUrl + 'category/get'), headers: headers);
       print(data.statusCode);
       if (data.statusCode == 200) {
         return json.decode(data.body);
@@ -138,5 +118,66 @@ class DataApi {
       return null;
     }
   }
-//  End Data API
+  // get Followings
+  Future<dynamic> getFollowimgs(String token) async{
+      try{
+        var headers = {"Authorization": token,};
+        var data = await http.get(Uri.parse(baseUrl + 'user/getFollowings'),headers: headers);
+        if (data.statusCode == 200) {
+          return json.decode(data.body);
+        }
+      }on Exception catch (_) {
+        return null;
+      }
+  }
+  // get Followers
+  Future<dynamic> getFollowers(String token) async{
+    try{
+      var headers = {"Authorization": token,};
+      var data = await http.get(Uri.parse(baseUrl + 'user/getFollowers'),headers: headers);
+      if (data.statusCode == 200) {
+        return json.decode(data.body);
+      }
+    }on Exception catch (_) {
+      return null;
+    }
+  }
+  // follow user
+  Future<dynamic> followUser(String token, String userId) async{
+    try{
+      var headers = {"Authorization": token,"Content-Type": "application/json"};
+      var body = jsonEncode({"Id": userId.toString()});
+      final encoding = Encoding.getByName('utf-8');
+      var data = await http.post(
+        Uri.parse(baseUrl + 'user/followUser'),
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
+      if (data.statusCode == 200) {
+        return json.decode(data.body);
+      }
+    }on Exception catch (_) {
+      return null;
+    }
+  }
+  // Unfollow user
+  Future<dynamic> unFollowUser(String token, String userId) async{
+    try{
+      var headers = {"Authorization": token,"Content-Type": "application/json"};
+      var body = jsonEncode({"Id": userId.toString()});
+      final encoding = Encoding.getByName('utf-8');
+      var data = await http.post(
+        Uri.parse(baseUrl + 'user/unFollowUser'),
+        headers: headers,
+        body: body,
+        encoding: encoding,
+      );
+      if (data.statusCode == 200) {
+        return json.decode(data.body);
+      }
+    }on Exception catch (_) {
+      return null;
+    }
+  }
 }

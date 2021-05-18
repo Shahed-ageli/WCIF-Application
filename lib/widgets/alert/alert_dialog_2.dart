@@ -29,7 +29,7 @@ class AlertDialog2 extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     Radius borderRadius = const Radius.circular(Sizes.RADIUS_60);
     return Dialog(
-      backgroundColor: AppColors.violet400,
+      backgroundColor: AppColors.grey2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: borderRadius,
@@ -53,7 +53,7 @@ class AlertDialog2 extends StatelessWidget {
             Text(
               StringConst.LOREM_IPSUM,
               style: theme.textTheme.bodyText2.copyWith(
-                color: AppColors.purpleH,
+                color: AppColors.black50,
               ),
             ),
             Spacer(),
@@ -63,14 +63,14 @@ class AlertDialog2 extends StatelessWidget {
               textStyle: theme.textTheme.subtitle2.copyWith(
                 color: AppColors.white,
               ),
-              color: AppColors.primaryColor,
+              color: AppColors.greenblue2,
               onPressed: () => closeDialog(),
             ),
             SpaceH8(),
             CustomButton(
               title: StringConst.MAYBE,
               height: Sizes.HEIGHT_44,
-              color: AppColors.pink50,
+              color: AppColors.greenligth,
               textStyle: theme.textTheme.subtitle2.copyWith(
                 color: AppColors.white,
               ),
@@ -80,7 +80,7 @@ class AlertDialog2 extends StatelessWidget {
             CustomButton(
               title: StringConst.CANCEL,
               height: Sizes.HEIGHT_44,
-              color: AppColors.purple100,
+              color: AppColors.grey,
               textStyle: theme.textTheme.subtitle2.copyWith(
                 color: AppColors.white,
               ),

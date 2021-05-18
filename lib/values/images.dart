@@ -2,31 +2,32 @@ part of values;
 
 class ImagePath {
   static const String imageDir = "assets/images";
-  static const String QQ = "$imageDir/undraw_Questions_re_1fy7.png";
-  static const String AMIR = "$imageDir/amir.jpg";
-  static const String BREAKFAST = "$imageDir/breakfast.png";
-  static const String ALICIA = "$imageDir/alicia.png";
-  static const String JEAN_COUTU = "$imageDir/jean_coutu.png";
-  static const String JOHN_BROWN = "$imageDir/john_brown.png";
-  static const String MAXIME_BARBOSA = "$imageDir/maxime_barbosa.png";
-  static const String AVA = "$imageDir/ava.png";
-  static const String SUNRISE = "$imageDir/sunrise.png";
-  static const String YOGA_2 = "$imageDir/yoga_2.png";
-  static const String COMPASS_LOGO = "$imageDir/compass_logo.png";
+  static const String QUESTIONS = "$imageDir/Questions.png";
+  static const String QUESTION2 = "$imageDir/Questions2.png";
+  static const String LOAD = "$imageDir/load.png";
   static const String MEN = "$imageDir/Men.png";
-  static const String FOOD = "$imageDir/food.jpg";
-  static const String MOUNTAIN = "$imageDir/mountain.png";
-  static const String PEOPLE = "$imageDir/people.png";
-  static const String URBAN = "$imageDir/urban.png";
-  static const String WILDLIFE = "$imageDir/wildlife.png";
-  static const String DARELL = "$imageDir/darell.png";
-  static const String HAWKINS = "$imageDir/hawkins.png";
-  static const String JANE = "$imageDir/jane.png";
-  static const String LESLIE = "$imageDir/leslie.png";
-  static const String NOTIFICATION = "$imageDir/notification.svg";
-  static const String VIETNAM_2 = "$imageDir/vietnam_2.jpg";
-  static const String GREAT_WALL = "$imageDir/great_wall.jpg";
-  static const String RESORTS = "$imageDir/resorts.jpg";
-  static const String BEACHES_BALI = "$imageDir/beaches_bali.jpg";
-  static const String THAILAND = "$imageDir/thailand.jpg";
+  static const String CONTACT_US = "$imageDir/contact_us.png";
+  static const String SYNC = "$imageDir/sync.png";
+  static const String NOTIFICATION = "$imageDir/notification.png";
+  static const String BREAKFAST = "$imageDir/breakfast.png";
+}
+
+class CategoryImage{
+  static const String imageDir = "assets/images";
+  static const String animal= "$imageDir/animal.png";
+  static const String book= "$imageDir/book.png";
+  static const String cooking= "$imageDir/cooking.png";
+  static const String devices= "$imageDir/devices.png";
+  static const String doctors= "$imageDir/doctors.png";
+  static const String game= "$imageDir/game.png";
+  static const String medical= "$imageDir/medical.png";
+  static const String programming= "$imageDir/programming.png";
+  static const String programming1= "$imageDir/programming1.png";
+  static const String programming2= "$imageDir/programming2.png";
+  static const String resturant= "$imageDir/resturant.png";
+  static const String shopping= "$imageDir/shopping.png";
+  static const String shopping3= "$imageDir/shopping3.png";
+  static const String shopping2= "$imageDir/shopping2.png";
+  static const String sport= "$imageDir/sport.png";
+  static const String student= "$imageDir/student.png";
 }

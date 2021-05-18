@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wcif_application/widgets/layout/adaptive.dart';
 import 'package:wcif_application/values/values.dart';
 
-import 'empty.dart';
+import '../layout/empty.dart';
 
 const double kSidePadding = Sizes.PADDING_24;
 const double kSpacing = Sizes.PADDING_16;
@@ -93,7 +93,7 @@ class _InterestCardState extends State<InterestCard> {
                 width: widthOfSelectedCircle,
                 height: widthOfSelectedCircle,
                 decoration: BoxDecoration(
-                  color: AppColors.accentColor,
+                  color: AppColors.greenblue3,
                   borderRadius: BorderRadius.all(
                     const Radius.circular(Sizes.RADIUS_60),
                   ),

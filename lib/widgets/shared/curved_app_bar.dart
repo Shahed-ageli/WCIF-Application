@@ -4,7 +4,6 @@ import 'package:wcif_application/widgets/layout/adaptive.dart';
 import 'package:wcif_application/values/values.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:wcif_application/widgets/shared/search_input.dart';
-
 import 'curved_container.dart';
 
 class CurvedAppBar extends StatelessWidget {
@@ -21,7 +20,7 @@ class CurvedAppBar extends StatelessWidget {
     this.onTrailingTap,
     this.hasLeading = true,
     this.hasTrailing = false,
-    this.backgroundColor = AppColors.primaryColor,
+    this.backgroundColor = AppColors.greenblue2,
     this.margin,
     this.decoration,
     this.topLeftRadius = Sizes.RADIUS_0,
@@ -77,7 +76,6 @@ class CurvedAppBar extends StatelessWidget {
         crossAxisAlignment: crossAxisAlignment,
         children: [
           //SpaceH63(),
-          SearchInput(),
           // (hasLeading == false && hasTrailing == false)
           //     ? Spacer()
           //     : Container(

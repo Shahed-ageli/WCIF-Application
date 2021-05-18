@@ -2,7 +2,6 @@ part of values;
 
 class Borders {
   static const InputBorder defaultBorder = OutlineInputBorder(
-//    borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
     borderSide: BorderSide(
       color: AppColors.white,
       width: 0.0,
@@ -12,15 +11,8 @@ class Borders {
 
   static const BorderSide defaultButtonBorder = BorderSide(
     width: 1.5,
-    color: AppColors.secondaryColor2,
+    color: AppColors.grey2,
   );
-
-  // static const InputBorder defaultPrimaryUnderlineBorder = UnderlineInputBorder(
-  //   borderSide: BorderSide(
-  //     width: 1.5,
-  //     color: DropAppColors.secondaryColor2,
-  //   ),
-  // );
 
   static const BorderSide defaultPrimaryBorder =
   BorderSide(width: Sizes.WIDTH_0, style: BorderStyle.none);
@@ -33,7 +25,7 @@ class Borders {
 
   static customOutlineInputBorder({
     double borderRadius = Sizes.RADIUS_12,
-    Color color = AppColors.primaryColor,
+    Color color = AppColors.greenblue2,
     double width = Sizes.WIDTH_1,
     BorderStyle style = BorderStyle.solid,
   }) {
@@ -48,7 +40,7 @@ class Borders {
   }
 
   static customUnderlineInputBorder({
-    Color color = AppColors.primaryColor,
+    Color color = AppColors.greenblue2,
     double width = Sizes.WIDTH_1,
     BorderStyle style = BorderStyle.solid,
   }) {

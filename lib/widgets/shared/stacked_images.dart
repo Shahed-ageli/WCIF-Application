@@ -7,8 +7,6 @@ const double kOffset = kWidth / 2;
 
 class StackedImages extends StatelessWidget {
   StackedImages({
-    @required this.images,
-    this.hasMoreImages = true,
     this.extraImagesLength,
     this.width,
     this.widthOfImageItem = kWidth,
@@ -24,9 +22,7 @@ class StackedImages extends StatelessWidget {
     ),
   });
 
-  final List<String> images;
   final BorderRadiusGeometry borderRadius;
-  final bool hasMoreImages;
   final int extraImagesLength;
   final double width;
   final double widthOfImageItem;
@@ -38,71 +34,36 @@ class StackedImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Container(
       width: width,
       child: Stack(
-        children: _buildStackedImages(context, images),
+          children: [
+            Container(
+              width: widthOfImageItem,
+              height: heightOfImageItem,
+              margin: EdgeInsets.only(left: (offset * 1)),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: borderRadius,
+              ),
+              child: Center(
+                child: Text(
+                  "$extraImagesLength",
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.subtitle1.copyWith(
+                    color: textColor,
+                    fontSize: (textSize) ??
+                        ("$extraImagesLength".length >= 4
+                            ? Sizes.TEXT_SIZE_8
+                            : Sizes.TEXT_SIZE_10),
+                  ),
+                ),
+              ),
+            ),
+          ]
       ),
     );
   }
-
-  List<Widget> _buildStackedImages(BuildContext context, List<String> images) {
-    ThemeData theme = Theme.of(context);
-
-    List<Widget> items = [];
-
-    for (int index = 0; index < images.length; index++) {
-      items.add(
-        Container(
-          width: widthOfImageItem,
-          height: heightOfImageItem,
-          margin: EdgeInsets.only(left: (offset * index)),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: color,
-              width: Sizes.WIDTH_2,
-            ),
-            borderRadius: borderRadius,
-          ),
-          child: ClipRRect(
-            borderRadius: borderRadius,
-            child: Image.asset(
-              images[index],
-              width: widthOfImageItem,
-              height: heightOfImageItem,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      );
-    }
-
-    hasMoreImages
-        ? items.add(
-      Container(
-        width: widthOfImageItem,
-        height: heightOfImageItem,
-        margin: EdgeInsets.only(left: (offset * items.length)),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: borderRadius,
-        ),
-        child: Center(
-          child: Text(
-            "+$extraImagesLength",
-            overflow: TextOverflow.ellipsis,
-            style: theme.textTheme.subtitle1.copyWith(
-              color: textColor,
-              fontSize: (textSize) ??
-                  ("+$extraImagesLength".length >= 4
-                      ? Sizes.TEXT_SIZE_8
-                      : Sizes.TEXT_SIZE_10),
-            ),
-          ),
-        ),
-      ),
-    )
-        : Container();
-    return items;
-  }
 }
+

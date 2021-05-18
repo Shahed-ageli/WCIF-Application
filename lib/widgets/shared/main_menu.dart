@@ -2,21 +2,21 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:provider/provider.dart';
-// import 'package:wcif_application/controllers/user_controller.dart';
+import 'package:wcif_application/controllers/user_controller.dart';
 import 'package:wcif_application/themes/app_theme.dart';
 import 'package:wcif_application/themes/theme_bloc.dart';
 import 'package:wcif_application/routes/router.gr.dart';
 import 'package:wcif_application/values/values.dart';
+import 'package:wcif_application/widgets/shared/spaces.dart';
 import '../../../main.dart';
 import 'package:wcif_application/widgets/layout/adaptive.dart';
 
 class MenuItem {
   MenuItem(this.title, {this.iconData, this.onTap, this.selected = false});
-
   final String title;
   final IconData iconData;
   final GestureTapCallback onTap;
-  bool selected;
+  bool selected =false;
 }
 
 class MainMenu extends StatefulWidget {
@@ -31,7 +31,6 @@ class _MainMenuState extends State<MainMenu>
 
   AnimationController _animationController;
   ThemeBloc themeBloc;
-
   List<MenuItem> menuList = [
     MenuItem(
       StringConst.HOME,
@@ -45,7 +44,6 @@ class _MainMenuState extends State<MainMenu>
     MenuItem(
       StringConst.PROFILE,
       iconData: FeatherIcons.user,
-      selected: false,
       onTap: ()
       {
         ExtendedNavigator.root.push(Routes.profileScreen);
@@ -54,24 +52,21 @@ class _MainMenuState extends State<MainMenu>
     MenuItem(
       StringConst.CATEGORIES,
       iconData: FeatherIcons.grid,
-      selected: false,
       onTap: ()
       {
-        ExtendedNavigator.root.push(Routes.categoriesUserScreen);
+        ExtendedNavigator.root.push(Routes.categoriesScreen);
       },
     ),
     MenuItem(
-      StringConst.FOLLOWERS,
+      StringConst.THE_FOLLOW,
       iconData: FeatherIcons.users,
-      selected: false,
       onTap: () {
         ExtendedNavigator.root.push(Routes.followingScreen);
       },
     ),
     MenuItem(
-      StringConst.Settings,
+      StringConst.SETTING,
       iconData: FeatherIcons.settings,
-      selected: false,
       onTap: () {
         ExtendedNavigator.root.push(Routes.settingScreen);
       },
@@ -79,7 +74,6 @@ class _MainMenuState extends State<MainMenu>
     MenuItem(
       StringConst.ABOUT_US,
       iconData: FeatherIcons.info,
-      selected: false,
       onTap: () {
         ExtendedNavigator.root.push(Routes.aboutUsScreen);
       },
@@ -87,7 +81,6 @@ class _MainMenuState extends State<MainMenu>
     MenuItem(
       StringConst.LOG_OUT,
       iconData: FeatherIcons.logOut,
-      selected: false,
       onTap: () {
         ExtendedNavigator.root.push(Routes.loginScreen);
       },
@@ -124,7 +117,6 @@ class _MainMenuState extends State<MainMenu>
 
   @override
   Widget build(BuildContext context) {
-
     return ClipRRect(
         borderRadius: BorderRadius.only(
           topRight: const Radius.circular(Sizes.RADIUS_60),
@@ -136,7 +128,7 @@ class _MainMenuState extends State<MainMenu>
               color: AppColors.white,
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.only(
@@ -153,12 +145,12 @@ class _MainMenuState extends State<MainMenu>
                       child:_buildDrawerHeader(),
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.primaryColor,
+                      color: AppColors.greenblue,
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(Sizes.PADDING_8,Sizes.PADDING_8,Sizes.PADDING_8,Sizes.PADDING_8),
+                Container(
+                  padding: const EdgeInsets.all(Sizes.PADDING_8),
                   child: Column(
                     children: _buildMenuList(menuList),
                   ),
@@ -170,51 +162,39 @@ class _MainMenuState extends State<MainMenu>
      );
   }
 
-
   Widget _buildDrawerHeader() {
     ThemeData theme = Theme.of(context);
-    // var user = Provider.of<UserController>(context, listen: true);
-
+    var user = Provider.of<UserController>(context, listen: true);
     return Stack(
+      alignment: Alignment.center,
       children: [
         Container(
-          padding: const EdgeInsets.fromLTRB(
-            Sizes.PADDING_10,
-            Sizes.PADDING_10,
-            Sizes.PADDING_10,
-            Sizes.PADDING_10,
-          ),
-
+          padding: const EdgeInsets.all(Sizes.PADDING_10,),
         ),
         Container(
-          padding: const EdgeInsets.fromLTRB(
-            Sizes.PADDING_16,
-            Sizes.PADDING_16,
-            Sizes.PADDING_16,
-            Sizes.PADDING_8,
-          ),
+          padding: const EdgeInsets.fromLTRB(Sizes.PADDING_16,Sizes.PADDING_16,Sizes.PADDING_16, Sizes.PADDING_8,),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Image.asset(
-                ImagePath.MEN,
-                fit: BoxFit.cover,
+              CircleAvatar(
+                backgroundImage: AssetImage(ImagePath.MEN),
+                minRadius: Sizes.RADIUS_30,
+                maxRadius: Sizes.RADIUS_30,
               ),
-              // SpaceH8(),
+              SpaceH2(),
               Text(
-                // user.user.loginName,
-                "name",
+                user.user.loginName,
                 style: theme.textTheme.subtitle1.copyWith(
                   color: AppColors.white,
-                  fontSize: Sizes.SIZE_20,
+                  fontSize: Sizes.SIZE_24,
                 ),
               ),
               Text(
-                "emal",
-                // user.user.email,
+                user.user.email,
                 style: theme.textTheme.bodyText2.copyWith(
-                  color: AppColors.moov,
+                  color: AppColors.grey2,
                   fontSize: Sizes.SIZE_20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],
@@ -237,23 +217,24 @@ class _MainMenuState extends State<MainMenu>
               width: assignWidth(context: context, fraction: 0.60),
               child: ListTile(
                 selected: menuItemList[index].selected,
-                selectedTileColor: AppColors.primaryColor,
+                selectedTileColor: AppColors.greenblue,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: Sizes.PADDING_16,
                 ),
                 leading: Icon(
                   menuItemList[index].iconData,
                   color: menuItemList[index].selected
-                      ? AppColors.primaryColor
-                      : AppColors.purpleL,
+                      ? AppColors.greyPurple
+                      : AppColors.greyPurple,
                 ),
                 title: Text(
                   menuItemList[index].title,
                   style: theme.textTheme.subtitle2.copyWith(
-                    fontSize: Sizes.SIZE_16,
+                    fontSize: Sizes.SIZE_20,
+                    fontWeight: FontWeight.bold,
                     color: menuItemList[index].selected
-                        ? AppColors.primaryColor
-                        : AppColors.violet400,
+                        ? AppColors.greenblue
+                        : AppColors.greenblue,
                   ),
                 ),
                 shape: RoundedRectangleBorder(
@@ -262,12 +243,21 @@ class _MainMenuState extends State<MainMenu>
                     const Radius.circular(Sizes.RADIUS_80),
                   ),
                 ),
-                onTap: menuItemList[index].onTap,
+                onTap:  menuItemList[index].onTap,
               ),
             ),
           ),
       );
     }
     return menuList;
+  }
+
+  toggel(List<MenuItem> menuItemList, int index){
+    for(int index=0; index<menuItemList.length;index++ ){
+      setState(() {
+        menuItemList[index].selected=!menuItemList[index].selected;
+      });
+    }
+    menuItemList[index].onTap;
   }
 }

@@ -20,13 +20,13 @@ class AppTheme {
       highlightColor: Colors.transparent,
       accentColor: colorScheme.primary,
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      focusColor: AppColors.primaryColor,
+      focusColor: AppColors.greenblue2,
     );
   }
 
   static const ColorScheme lightColorScheme = ColorScheme(
-    primary: Color(0xFF8856AC),
-    primaryVariant: Color(0xFF117378),
+    primary: Color(0xFF206977),
+    primaryVariant: Color(0xffacadae),
     secondary: Color(0xFFEFF3F3),
     secondaryVariant: Color(0xFFFAFBFB),
     background: Color(0xFFE6EBEB),
@@ -36,7 +36,7 @@ class AppTheme {
     onError: _lightFillColor,
     onPrimary: _lightFillColor,
     onSecondary: Color(0xFF322942),
-    onSurface: Color(0xFF2b1136),
+    onSurface: Color(0xff1d334d),
     brightness: Brightness.light,
   );
 
@@ -50,67 +50,67 @@ class AppTheme {
   static final TextTheme _textTheme = TextTheme(
     headline1: GoogleFonts.roboto(
       fontSize: Sizes.TEXT_SIZE_96,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _bold,
       fontStyle: FontStyle.normal,
     ),
     headline2: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_60,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _bold,
       fontStyle: FontStyle.normal,
     ),
     headline3: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_48,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _bold,
       fontStyle: FontStyle.normal,
     ),
     headline4: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_34,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _bold,
       fontStyle: FontStyle.normal,
     ),
     headline5: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_24,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _bold,
       fontStyle: FontStyle.normal,
     ),
     headline6: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_20,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _bold,
       fontStyle: FontStyle.normal,
     ),
     subtitle1: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_16,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _semiBold,
       fontStyle: FontStyle.normal,
     ),
     subtitle2: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_14,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _semiBold,
       fontStyle: FontStyle.normal,
     ),
     bodyText1: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_16,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _light,
       fontStyle: FontStyle.normal,
     ),
     bodyText2: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_14,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontWeight: _light,
       fontStyle: FontStyle.normal,
     ),
     button: GoogleFonts.poppins(
       fontSize: Sizes.TEXT_SIZE_14,
-      color: AppColors.primaryText,
+      color: AppColors.blackFull,
       fontStyle: FontStyle.normal,
       fontWeight: _medium,
     ),

@@ -57,7 +57,7 @@ class BottomSheet2 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage(ImagePath.AVA),
+                backgroundImage: AssetImage(ImagePath.MEN),
                 radius: 32,
               ),
               SpaceW16(),
@@ -66,9 +66,9 @@ class BottomSheet2 extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      StringConst.YOGA_TIME,
+                      "time",
                       style: theme.textTheme.bodyText2.copyWith(
-                        color: AppColors.purpleL,
+                        color: AppColors.greyPurple,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -86,7 +86,7 @@ class BottomSheet2 extends StatelessWidget {
           Spacer(),
           CustomButton(
             title: StringConst.TELL_FRIENDS,
-            color: AppColors.purpleL,
+            color: AppColors.greyPurple,
             hasIcon: true,
             icon: Icon(FeatherIcons.share2, color: AppColors.white),
             textStyle: theme.textTheme.subtitle2.copyWith(
@@ -97,7 +97,7 @@ class BottomSheet2 extends StatelessWidget {
           SpaceH16(),
           CustomButton(
             title: StringConst.DONE,
-            color: AppColors.primaryColor,
+            color: AppColors.greenblue2,
             textStyle: theme.textTheme.subtitle2.copyWith(
               color: AppColors.white,
             ),

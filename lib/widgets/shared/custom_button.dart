@@ -6,11 +6,10 @@ class CustomButton extends StatelessWidget {
   CustomButton({
     this.title,
     this.onPressed,
-//    this.width = Sizes.WIDTH_150,
     this.height = Sizes.HEIGHT_50,
     this.elevation = Sizes.ELEVATION_1,
     this.borderRadius = Sizes.RADIUS_24,
-    this.color = AppColors.blackShade5,
+    this.color = AppColors.black60,
     this.borderSide = Borders.defaultPrimaryBorder,
     this.textStyle,
     this.icon,
@@ -18,7 +17,6 @@ class CustomButton extends StatelessWidget {
   });
 
   final VoidCallback onPressed;
-//  final double width;
   final double height;
   final double elevation;
   final double borderRadius;
@@ -34,7 +32,6 @@ class CustomButton extends StatelessWidget {
     return MaterialButton(
       onPressed: onPressed,
       elevation: elevation,
-//      minWidth: width ?? MediaQuery.of(context).size.width,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
         side: borderSide,

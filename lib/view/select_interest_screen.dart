@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:wcif_application/controllers/user_controller.dart';
 import 'package:wcif_application/widgets/shared/custom_button.dart';
 import 'package:wcif_application/widgets/shared/interest_card.dart';
 import 'package:wcif_application/widgets/shared/spaces.dart';
@@ -14,21 +16,16 @@ class InterestItem {
 
 class SelectInterestScreen extends StatelessWidget {
   List<InterestItem> items = [
-    InterestItem(StringConst.NATURE, ImagePath.THAILAND),
-    InterestItem(StringConst.FOOD, ImagePath.FOOD),
-    InterestItem(StringConst.PEOPLE, ImagePath.PEOPLE),
-    InterestItem(StringConst.ADVENTURE, ImagePath.GREAT_WALL),
-    InterestItem(StringConst.WILDLIFE, ImagePath.WILDLIFE),
-    InterestItem(StringConst.CULTURE, ImagePath.VIETNAM_2),
-    InterestItem(StringConst.BEACH, ImagePath.BEACHES_BALI),
-    InterestItem(StringConst.MOUNTAIN, ImagePath.MOUNTAIN),
-    InterestItem(StringConst.HEALTH, ImagePath.URBAN),
-    InterestItem(StringConst.EDUCATION, ImagePath.RESORTS),
+    InterestItem(StringConst.NATURE, ImagePath.SYNC),
+    InterestItem(StringConst.FOOD, ImagePath.SYNC),
+    InterestItem(StringConst.PEOPLE, ImagePath.SYNC),
+    InterestItem(StringConst.ADVENTURE, ImagePath.SYNC),
   ];
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    var user = Provider.of<UserController>(context, listen: true);
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -41,19 +38,22 @@ class SelectInterestScreen extends StatelessWidget {
               text: StringConst.HELLO,
               style: theme.textTheme.bodyText1.copyWith(
                 color: AppColors.greenblue,
+                fontSize:Sizes.SIZE_20,
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: StringConst.KRISTIN,
+                  text: "name",
                   style: theme.textTheme.bodyText1.copyWith(
                     fontWeight: FontWeight.bold,
                     color: AppColors.greenblue,
+                    fontSize:Sizes.SIZE_24,
                   ),
                 ),
                 TextSpan(
                   text: StringConst.INTEREST,
                   style: theme.textTheme.bodyText1.copyWith(
                     color: AppColors.greenblue,
+                    fontSize:Sizes.SIZE_20,
                   ),
                 ),
               ],
@@ -63,7 +63,8 @@ class SelectInterestScreen extends StatelessWidget {
           Text(
             StringConst.SELECT_5,
             style: theme.textTheme.bodyText2.copyWith(
-              color: AppColors.grey,
+              color: AppColors.blackFull,
+              fontSize:Sizes.SIZE_24
             ),
           ),
           SpaceH16(),
@@ -78,7 +79,7 @@ class SelectInterestScreen extends StatelessWidget {
               ExtendedNavigator.root.push(Routes.loginScreen);
             },
             height: Sizes.HEIGHT_56,
-            title: StringConst.SIGN_IN,
+            title: StringConst.SIGN_IN_now,
             borderRadius: Sizes.RADIUS_8,
             textStyle: theme.textTheme.subtitle1.copyWith(
               color: AppColors.white,

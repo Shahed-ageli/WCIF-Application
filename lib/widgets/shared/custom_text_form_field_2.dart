@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wcif_application/values/values.dart';
 
-import 'empty.dart';
+import '../layout/empty.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final TextStyle textFormFieldStyle;
@@ -42,7 +42,7 @@ class CustomTextFormField extends StatelessWidget {
     this.contentPaddingHorizontal = Sizes.PADDING_16,
     this.contentPaddingVertical = Sizes.PADDING_16,
     this.hintText,
-    this.prefixIconColor = AppColors.primaryColor,
+    this.prefixIconColor = AppColors.greenblue2,
     this.borderColor = AppColors.grey,
     this.focusedBorderColor = AppColors.grey,
     this.enabledBorderColor = AppColors.grey,

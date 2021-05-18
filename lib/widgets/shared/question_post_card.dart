@@ -1,39 +1,42 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:wcif_application/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:wcif_application/widgets/layout/adaptive.dart';
 import 'package:wcif_application/values/values.dart';
+import 'package:wcif_application/widgets/shared/pill.dart';
 import 'package:wcif_application/widgets/shared/spaces.dart';
 
 import 'action_icon.dart';
 
-class QuestionPostCard extends StatelessWidget {
+class QuestionPostCard extends StatefulWidget {
   QuestionPostCard({
-    this.height,
+    this.height =340,
     this.width,
     this.borderRadius,
     this.decoration,
     this.padding,
     this.margin,
-    this.color = AppColors.white,
-    this.title = StringConst.JAMILA,
-    this.subTitle = StringConst.DATE,
-    this.content = StringConst.LOREM_IPSUM,
-    this.profileImagePath = ImagePath.AMIR,
+    this.color ,
+    this.auther ,
+    this.date,
+    this.quationsTitel ,
+    this.quationsContent,
+    this.categoryName,
+    this.profileImagePath ,
     this.onCommentsTap,
-    this.onLike,
-    this.onShare,
-    this.headMainAxisAlignment = MainAxisAlignment.start,
-    this.footerMainAxisAlignment = MainAxisAlignment.start,
+    this.numberOfComments,
+    this.onUpVote,
+    this.numberOfUpVotes,
+    this.onDownVote,
+    this.numberOfDownVotes,
+    this.headMainAxisAlignment ,
+    this.footerMainAxisAlignment,
     this.contentTextAlign,
     this.titleStyle,
     this.subtitleStyle,
     this.contentStyle,
     this.iconTextStyle,
-    this.canShare = true,
     this.iconColor,
-    this.hasImage = false,
+    this.hasImage ,
     this.contentImagePath,
   });
 
@@ -44,48 +47,58 @@ class QuestionPostCard extends StatelessWidget {
   final BoxDecoration decoration;
   final double borderRadius;
   final Color color;
-  final String title;
-  final String subTitle;
-  final String content;
+  final String auther;
+  final String date;
+  final String quationsTitel;
+  final String quationsContent;
+  final String categoryName;
   final String profileImagePath;
   final String contentImagePath;
   final TextStyle titleStyle;
   final TextStyle subtitleStyle;
   final TextStyle contentStyle;
   final TextStyle iconTextStyle;
-  final GestureTapCallback onShare;
   final GestureTapCallback onCommentsTap;
-  final GestureTapCallback onLike;
+  final String numberOfComments;
+  final GestureTapCallback onUpVote;
+  final String numberOfUpVotes;
+  final GestureTapCallback onDownVote;
+  final String numberOfDownVotes;
   final MainAxisAlignment headMainAxisAlignment;
   final MainAxisAlignment footerMainAxisAlignment;
   final TextAlign contentTextAlign;
-  final bool canShare;
   final bool hasImage;
   final Color iconColor;
 
   @override
+  _QuestionPostCardState createState() => _QuestionPostCardState();
+}
+
+class _QuestionPostCardState extends State<QuestionPostCard> {
+  @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Container(
-      width: width,
-      height: height ?? assignHeight(context: context, fraction: 0.3),
-      margin: margin,
-      padding: padding,
-      decoration: decoration ??
+      width: widget.width,
+      height: widget.height ?? assignHeight(context: context, fraction: 0.3),
+      margin: widget.margin,
+      padding: widget.padding,
+      decoration: widget.decoration ??
           BoxDecoration(
-            color: color,
-            borderRadius: borderRadius ??
+            color: widget.color,
+            borderRadius: widget.borderRadius ??
                 BorderRadius.all(
                   Radius.circular(Sizes.RADIUS_20),
                 ),
           ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: headMainAxisAlignment,
+            mainAxisAlignment: widget.headMainAxisAlignment,
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage(profileImagePath),
+                backgroundImage: AssetImage(widget.profileImagePath),
                 minRadius: Sizes.RADIUS_20,
                 maxRadius: Sizes.RADIUS_20,
               ),
@@ -94,12 +107,12 @@ class QuestionPostCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
-                    style: titleStyle ?? theme.textTheme.subtitle2,
+                    widget.auther,
+                    style: widget.titleStyle ?? theme.textTheme.subtitle2,
                   ),
                   Text(
-                    subTitle,
-                    style: subtitleStyle ??
+                    widget.date,
+                    style: widget.subtitleStyle ??
                         theme.textTheme.bodyText1.copyWith(
                           color: AppColors.grey,
                           fontSize: Sizes.TEXT_SIZE_14,
@@ -109,82 +122,140 @@ class QuestionPostCard extends StatelessWidget {
               ),
             ],
           ),
-          SpaceH16(),
-          Expanded(
-            child: Text(
-              content,
-              maxLines: 4,
-              textAlign: contentTextAlign,
-              style: contentStyle ??
-                  theme.textTheme.bodyText1.copyWith(
-                    fontSize: Sizes.TEXT_SIZE_14,
-                  ),
-            ),
-          ),
-          hasImage ? SpaceH4() : Container(),
-          hasImage ? Image.asset(contentImagePath) : Container(),
-          SpaceH16(),
-          Row(
-            mainAxisAlignment: footerMainAxisAlignment,
+          SpaceH8(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              canShare
-                  ? InkWell(
-                onTap: onShare,
-                child: Icon(FeatherIcons.navigation, color: AppColors.grey),
-              )
-                  : Container(),
-              canShare ? Spacer() : Container(),
+              Text(
+                widget.quationsTitel,
+                maxLines: 1,
+                textAlign: widget.contentTextAlign,
+                style: widget.contentStyle ??
+                    theme.textTheme.bodyText1.copyWith(
+                      fontSize: Sizes.TEXT_SIZE_14,
+                  ),
+              ),
+              Text(
+                widget.quationsContent,
+                maxLines: 2,
+                textAlign: widget.contentTextAlign,
+                style: widget.contentStyle ??
+                    theme.textTheme.bodyText1.copyWith(
+                      fontSize: Sizes.TEXT_SIZE_14,
+                    ),
+              ),
+            ],
+          ),
+          Row(
+              mainAxisAlignment:MainAxisAlignment.center,
+              children: [
+                widget.hasImage ? SpaceH4() : Container(),
+                widget.hasImage ? Image.asset(widget.contentImagePath) : Container(),
+              ]
+          ),
+          SpaceH8(),
+          Row(
+            children: [
+              Text(
+                StringConst.QUESTION_CATEGORIES +" : ",
+                style: widget.titleStyle,
+              ),
+              Pill(
+                title: widget.categoryName,
+                isSelected: true,
+                unselectedBackgroundColor: AppColors.greenblue3,
+                titleStyle:theme.textTheme.subtitle1.copyWith(
+                  color: AppColors.white,
+                ),
+                isToggeled: false,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: widget.footerMainAxisAlignment,
+            children: [
               ActionIcon(
-                onTap: onCommentsTap,
-                title: StringConst.NUMBER_OF_COMMENTS,
+                onTap: widget.onCommentsTap,
+                title: widget.numberOfComments,
                 iconData: FeatherIcons.messageSquare,
                 isHorizontal: true,
-                color: iconColor,
-                titleStyle: iconTextStyle,
+                color: widget.iconColor,
+                titleStyle: widget.iconTextStyle,
               ),
               SpaceW16(),
               ActionIcon(
-                onTap: onLike,
-                title: StringConst.NUMBER_OF_LIKES,
+                onTap: widget.onDownVote,
+                title: widget.numberOfDownVotes,
                 iconData: FeatherIcons.thumbsDown,
                 isHorizontal: true,
-                titleStyle: iconTextStyle,
-                color: iconColor,
+                titleStyle: widget.iconTextStyle,
+                color: widget.iconColor,
               ),
               SpaceW16(),
               ActionIcon(
-                onTap: onLike,
-                title: StringConst.NUMBER_OF_LIKES,
+                onTap: widget.onUpVote,
+                title:  widget.numberOfUpVotes,
                 iconData: FeatherIcons.thumbsUp,
                 isHorizontal: true,
-                titleStyle: iconTextStyle,
-                color: iconColor,
+                titleStyle: widget.iconTextStyle,
+                color: widget.iconColor,
               ),
               PopupMenuButton<int>(
                 icon: Icon(
                   Icons.menu,
-                  color:iconColor,
+                  color:widget.iconColor,
                 ),
+                onSelected: (value)=>{callOnSelected(value)},
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     value: 1,
                     child: Row(
                       children: [
-                        Icon(Icons.edit,color:AppColors.purpleH),
-                        SpaceW8(),
+                        Icon(
+                          Icons.edit,
+                          color:AppColors.black50,
+                        ),
+                        SpaceW4(),
                         Text("تعديل"),
                       ],
                     ),
+                    enabled: true,
                   ),
                   PopupMenuItem(
                     value: 2,
                     child: Row(
                       children: [
-                        Icon(Icons.delete,color:AppColors.purpleH),
-                        SpaceW8(),
+                        Icon(Icons.delete,color:AppColors.black50),
+                        SpaceW4(),
                         Text("حذف"),
                       ],
                     ),
+                    enabled: false,
+                  ),
+                  PopupMenuItem(
+                    value: 3,
+                    child: Row(
+                      children: [
+                        Icon(
+                            Icons.delete,
+                            color:AppColors.black50,
+                        ),
+                        SpaceW4(),
+                        Text("متابعة"),
+                      ],
+                    ),
+                    enabled: false,
+                  ),
+                  PopupMenuItem(
+                    value: 4,
+                    child: Row(
+                      children: [
+                        Icon(Icons.delete,color:AppColors.black50),
+                        SpaceW4(),
+                        Text("إلغاء تفيل"),
+                      ],
+                    ),
+                    enabled: false,
                   ),
                 ],
               ),
@@ -193,5 +264,22 @@ class QuestionPostCard extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+callOnSelected(int value) {
+  switch(value){
+    case 1:
+      print(1);
+      break;
+    case 2:
+      print(2);
+      break;
+    case 3:
+      print(3);
+      break;
+    case 4:
+      print(4);
+      break;
   }
 }

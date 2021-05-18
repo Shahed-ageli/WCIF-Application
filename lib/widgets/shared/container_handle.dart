@@ -6,7 +6,7 @@ class ContainerHandle extends StatelessWidget {
   ContainerHandle({
     this.height = 5,
     this.width,
-    this.color = AppColors.purpleL,
+    this.color = AppColors.greyPurple,
     this.borderRadius = const BorderRadius.all(const Radius.circular(16)),
   });
 

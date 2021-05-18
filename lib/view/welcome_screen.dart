@@ -15,9 +15,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   double currentIndexPage;
   int pageLength;
   List<String> onBoardingImageList = [
-    ImagePath.QQ,
-    ImagePath.YOGA_2,
-    ImagePath.SUNRISE,
+    ImagePath.QUESTIONS,
+    ImagePath.QUESTION2,
+    ImagePath.QUESTIONS,
   ];
 
   @override
@@ -91,7 +91,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             imageList[index],
             width: assignWidth(context: context, fraction: 1),
             height: assignHeight(context: context, fraction: 0.65),
-            fit: BoxFit.cover,
+            fit: BoxFit.fill,
           ),
         ),
       );
@@ -118,7 +118,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 StringConst.LOREM_IPSUM,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyText2.copyWith(
-                  color: AppColors.blackShade6,
+                  color: AppColors.black60,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Sizes.SIZE_20,
                 ),
               ),
             ),

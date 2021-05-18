@@ -28,7 +28,7 @@ class AlertDialog3 extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     Radius borderRadius = const Radius.circular(Sizes.RADIUS_60);
     return Dialog(
-      backgroundColor: AppColors.violet400,
+      backgroundColor: AppColors.grey2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topRight: borderRadius,
@@ -52,7 +52,7 @@ class AlertDialog3 extends StatelessWidget {
             Text(
               StringConst.LOREM_IPSUM,
               style: theme.textTheme.bodyText2.copyWith(
-                color: AppColors.purpleH,
+                color: AppColors.black50,
               ),
             ),
             Spacer(),
@@ -61,7 +61,7 @@ class AlertDialog3 extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   onPressed: () => closeDialog(),
-                  backgroundColor: AppColors.pink50,
+                  backgroundColor: AppColors.greenligth,
                   child: Icon(
                     Icons.close,
                     color: AppColors.white,
@@ -70,7 +70,7 @@ class AlertDialog3 extends StatelessWidget {
                 SpaceW8(),
                 FloatingActionButton(
                   onPressed: () => closeDialog(),
-                  backgroundColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.greenblue2,
                   child: Icon(
                     Icons.done,
                     color: AppColors.white,

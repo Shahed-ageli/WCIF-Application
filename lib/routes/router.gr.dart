@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:wcif_application/view/user_questions_screen.dart';
 
 import '../view/about_us_screen.dart';
-import '../view/add-edit_question_screen.dart';
+import '../view/add-question_screen.dart';
 import '../view/categories_screen.dart';
-import '../view/categories_user_screen.dart';
 import '../view/category_questions_screen.dart';
 import '../view/following_screen.dart';
 import '../view/home_screen.dart';
@@ -20,6 +20,7 @@ import '../view/select_interest_screen.dart';
 import '../view/setting_screen.dart';
 import '../view/signup_screen.dart';
 import '../view/user_answers_screen.dart';
+import '../view/user_questions_screen.dart';
 import '../view/user_search_results.dart';
 import '../view/welcome_screen.dart';
 
@@ -34,7 +35,7 @@ import '../widgets/alert/bottom_sheet_4.dart';
 class Routes {
   static const String welcomeScreen = '/';
   static const String aboutUsScreen = '/aboutUsScreen';
-  static const String addEditQuestionScreen = '/add-edit-question-screen';
+  static const String addQuestionScreen = '/add-question-screen';
   static const String alertDialog1 = '/alert-dialog1';
   static const String alertDialog2 = '/alert-dialog2';
   static const String alertDialog3 = '/alert-dialog3';
@@ -54,18 +55,18 @@ class Routes {
   static const String settingScreen = '/setting-screen';
   static const String signUpScreen = '/sign-up-screen';
   static const String userAnswersScreen = '/user-answers-screen';
+  static const String userQuestionsScreen = '/user-auestions-screen';
   static const String userSearchResultsScreen = '/user-search-results-screen';
   static const String homeScreen = '/home-screen';
   static const String questionDetailsScreen = '/questionDetails-screen';
   static const String categoriesScreen = '/categories-screen';
-  static const String categoriesUserScreen = '/categories-user-screen';
   static const String menuScreen = '/menu-screen';
 
 
 
   static const all = <String>{
     aboutUsScreen,
-    addEditQuestionScreen,
+    addQuestionScreen,
     alertDialog1,
     alertDialog2,
     alertDialog3,
@@ -73,7 +74,6 @@ class Routes {
     bottomSheet2,
     bottomSheet3,
     bottomSheet4,
-
     followingScreen,
     categoryQuestionsScreen,
     questionCategoryScreen,
@@ -87,11 +87,11 @@ class Routes {
     settingScreen,
     signUpScreen,
     userAnswersScreen,
+    userQuestionsScreen,
     userSearchResultsScreen,
     homeScreen,
     questionDetailsScreen,
     categoriesScreen,
-    categoriesUserScreen,
     menuScreen,
   };
 }
@@ -102,7 +102,7 @@ class AppRouter extends RouterBase {
   final _routes = <RouteDef>[
 
     RouteDef(Routes.aboutUsScreen, page: AboutUsScreen),
-    RouteDef(Routes.addEditQuestionScreen, page: AddEditQuestionScreen),
+    RouteDef(Routes.addQuestionScreen, page: AddQuestionScreen),
     RouteDef(Routes.alertDialog1, page: AlertDialog1),
     RouteDef(Routes.alertDialog2, page: AlertDialog2),
     RouteDef(Routes.alertDialog3, page: AlertDialog3),
@@ -123,11 +123,11 @@ class AppRouter extends RouterBase {
     RouteDef(Routes.settingScreen, page: SettingScreen),
     RouteDef(Routes.signUpScreen, page: SignUpScreen),
     RouteDef(Routes.userAnswersScreen, page: UserAnswersScreen),
+    RouteDef(Routes.userQuestionsScreen, page: UserQuestionsScreen),
     RouteDef(Routes.userSearchResultsScreen, page: UserSearchResultsScreen),
     RouteDef(Routes.homeScreen, page: HomeScreen),
     RouteDef(Routes.questionDetailsScreen, page: QuestionDetailsScreen),
     RouteDef(Routes.categoriesScreen, page: CategoriesScreen),
-    RouteDef(Routes.categoriesUserScreen, page: CategoriesUserScreen),
     RouteDef(Routes.menuScreen, page: MainMenu),
 
   ];
@@ -142,9 +142,9 @@ class AppRouter extends RouterBase {
       );
     },
 
-    AddEditQuestionScreen: (data) {
+    AddQuestionScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => AddEditQuestionScreen(),
+        builder: (context) => AddQuestionScreen(),
         settings: data,
       );
     },
@@ -247,7 +247,7 @@ class AppRouter extends RouterBase {
 
     ProfileScreen: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => ProfileScreen(),
+        builder: (context) =>  ProfileScreen(),
         settings: data,
       );
     },
@@ -283,6 +283,13 @@ class AppRouter extends RouterBase {
     UserAnswersScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => UserAnswersScreen(),
+        settings: data,
+      );
+    },
+
+    UserQuestionsScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => UserQuestionsScreen(),
         settings: data,
       );
     },
@@ -326,13 +333,6 @@ class AppRouter extends RouterBase {
     CategoriesScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => CategoriesScreen(),
-        settings: data,
-      );
-    },
-
-    CategoriesUserScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => CategoriesUserScreen(),
         settings: data,
       );
     },

@@ -15,10 +15,10 @@ class AnswerPostCard extends StatelessWidget {
     this.padding,
     this.margin,
     this.color = AppColors.white,
-    this.title = StringConst.JAMILA,
-    this.subTitle = StringConst.DATE,
-    this.content = StringConst.LOREM_IPSUM,
-    this.profileImagePath = ImagePath.AMIR,
+    this.title ,
+    this.subTitle,
+    this.content,
+    this.profileImagePath ,
     this.headMainAxisAlignment = MainAxisAlignment.start,
     this.footerMainAxisAlignment = MainAxisAlignment.start,
     this.contentTextAlign,
@@ -115,7 +115,7 @@ class AnswerPostCard extends StatelessWidget {
             children: [
               ActionIcon(
                 onTap: onLike,
-                title: StringConst.NUMBER_OF_LIKES,
+                title: "0",
                 iconData: FeatherIcons.thumbsDown,
                 isHorizontal: true,
                 titleStyle: iconTextStyle,
@@ -124,7 +124,7 @@ class AnswerPostCard extends StatelessWidget {
               SpaceW16(),
               ActionIcon(
                 onTap: onLike,
-                title: StringConst.NUMBER_OF_LIKES,
+                title: "0",
                 iconData: FeatherIcons.thumbsUp,
                 isHorizontal: true,
                 titleStyle: iconTextStyle,
@@ -140,21 +140,45 @@ class AnswerPostCard extends StatelessWidget {
                     value: 1,
                     child: Row(
                       children: [
-                        Icon(Icons.edit,color:AppColors.purpleH),
+                        Icon(Icons.edit,color:AppColors.black50),
                         SpaceW8(),
                         Text("تعديل"),
                       ],
                     ),
+                    enabled: false,
                   ),
                   PopupMenuItem(
                     value: 2,
                     child: Row(
                       children: [
-                        Icon(Icons.delete,color:AppColors.purpleH),
+                        Icon(Icons.delete,color:AppColors.black50),
                         SpaceW8(),
                         Text("حذف"),
                       ],
                     ),
+                    enabled: false,
+                  ),
+                  PopupMenuItem(
+                    value: 3,
+                    child: Row(
+                      children: [
+                        Icon(Icons.delete,color:AppColors.black50),
+                        SpaceW8(),
+                        Text("تعيين مقبولة"),
+                      ],
+                    ),
+                    enabled: false,
+                  ),
+                  PopupMenuItem(
+                    value: 4,
+                    child: Row(
+                      children: [
+                        Icon(Icons.delete,color:AppColors.black50),
+                        SpaceW8(),
+                        Text("حذف"),
+                      ],
+                    ),
+                    enabled: false,
                   ),
                 ],
               ),

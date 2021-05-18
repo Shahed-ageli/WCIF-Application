@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wcif_application/values/values.dart';
 
-class PillItem {
-  PillItem({@required this.title, this.color});
-
-  final String title;
-  final Color color;
-}
-
 class Pill extends StatefulWidget {
   Pill({
     @required this.title,
@@ -23,9 +16,10 @@ class Pill extends StatefulWidget {
       ),
     ),
     this.border,
-    this.selectedBackgroundColor = AppColors.accentYellowColor,
+    this.selectedBackgroundColor = AppColors.greenblue3,
     this.unselectedBackgroundColor = AppColors.white,
     this.isSelected = false,
+    this.isToggeled = true,
   });
 
   final String title;
@@ -37,7 +31,7 @@ class Pill extends StatefulWidget {
   final Color unselectedBackgroundColor;
   final Color selectedBackgroundColor;
   final bool isSelected;
-
+  final bool isToggeled ;
   @override
   _PillState createState() => _PillState();
 }
@@ -55,13 +49,13 @@ class _PillState extends State<Pill> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     TextStyle defaultTitleStyle = theme.textTheme.subtitle1.copyWith(
-      color: AppColors.secondaryColor2,
+      color: AppColors.grey2,
     );
     TextStyle defaultSelectedTitleStyle = theme.textTheme.subtitle1.copyWith(
-      color: AppColors.white,
+      color: AppColors.yellow,
     );
     return InkWell(
-      onTap: () => _onPillTap(),
+      onTap: widget.isToggeled ? () => _onPillTap() : ()=>{},
       child: Container(
         padding: widget.padding,
         decoration: BoxDecoration(
@@ -69,7 +63,7 @@ class _PillState extends State<Pill> {
               ? widget.selectedBackgroundColor
               : widget.unselectedBackgroundColor,
           borderRadius: widget.borderRadius,
-          border: _toggleBorder(isSelected),
+          border: _toggleBorder(false),
         ),
         child: Text(
           widget.title,
@@ -99,7 +93,7 @@ class _PillState extends State<Pill> {
     return state
         ? noBorder
         : Border.all(
-      color: AppColors.secondaryColor2,
+      color: AppColors.grey2,
       width: Sizes.WIDTH_2,
     );
   }

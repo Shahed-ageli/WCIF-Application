@@ -30,10 +30,10 @@ class SearchInput extends StatelessWidget {
 
           child: CustomTextFormField(
             textFormFieldStyle: theme.textTheme.subtitle1.copyWith(
-              color: AppColors.moov,
+              color: AppColors.bluegreen,
             ),
             hintText: StringConst.SEARCH_HINT_TEXT,
-            prefixIconColor: AppColors.primaryColor,
+            prefixIconColor: AppColors.bluegreen,
             hintTextStyle: theme.textTheme.bodyText2.copyWith(
               color: AppColors.grey,
             ),

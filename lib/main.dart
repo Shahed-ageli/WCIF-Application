@@ -5,8 +5,7 @@ import 'package:wcif_application/routes/router.gr.dart';
 import 'themes/theme_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:wcif_application/controllers/user_controller.dart';
-import 'package:wcif_application/public_models/loading.dart';
-import 'package:bot_toast/bot_toast.dart';
+import 'package:wcif_application/widgets/layout/loading.dart';
 
 void main() {
   runApp(start());
@@ -42,6 +41,15 @@ class _startState extends State<start> {
               ChangeNotifierProvider<UserController>.value(
                 value: UserController(),
               ),
+              // ChangeNotifierProvider<QuestionController>.value(
+              //   value: QuestionController(),
+              // ),
+              // ChangeNotifierProvider<CategoryController>.value(
+              //   value: CategoryController(),
+              // ),
+              // ChangeNotifierProvider<AnswerController>.value(
+              //   value: AnswerController(),
+              // ),
             ],
             child: MaterialApp(
               localizationsDelegates: [

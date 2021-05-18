@@ -65,7 +65,7 @@ class _BottomSheet4State extends State<BottomSheet4> {
     return Container(
       height: assignHeight(context: context, fraction: 0.5),
       decoration: BoxDecoration(
-        color: AppColors.violet400,
+        color: AppColors.grey2,
         borderRadius: BorderRadius.only(
           topLeft: borderRadius,
         ),
@@ -96,7 +96,7 @@ class _BottomSheet4State extends State<BottomSheet4> {
       double height = getHeight(index, sheetItems.length);
       items.add(
         SheetItem(
-          backgroundColor: AppColors.violet400,
+          backgroundColor: AppColors.grey2,
           height: height,
           hasTitle: sheetItems[index].hasTitle,
           title: sheetItems[index].title,

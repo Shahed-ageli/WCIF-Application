@@ -9,7 +9,7 @@ import 'package:wcif_application/widgets/layout/adaptive.dart';
 import 'package:wcif_application/routes/router.gr.dart';
 import 'package:wcif_application/values/values.dart';
 import 'package:wcif_application/widgets/shared/spaces.dart';
-import 'package:wcif_application/public_models/loading.dart';
+import 'package:wcif_application/widgets/layout/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:wcif_application/controllers/user_controller.dart';
 
@@ -22,6 +22,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  static bool visibil= false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
     var loading = Provider.of<LoadingModel>(context, listen: true);
     var user = Provider.of<UserController>(context, listen: true);
     ThemeData theme = Theme.of(context);
-
 
     return GestureDetector(
       onTap: () {
@@ -40,75 +46,89 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Scaffold(
         backgroundColor: AppColors.white,
-        body: Container(
-          child: ListView(
-              children: [ Column(
-              children: [
-                _drawTearDrop(),
-                Container(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: Sizes.PADDING_24),
-                  child: _buildForm(),
-                ),
-                SpaceH20(),
-                Container(
-                  height: tearDropButtonRadius * 3,
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TearDropButton(
-                            buttonText: StringConst.SIGN_IN,
-                            radius: tearDropButtonRadius,
-                            tearDropAlignment: TearDropAlignment.topRight,
-                            hasShadow: true,
-                            //TODO: ontap action
-                            onTap:  ()  async {
-                              // loading.start();
-                              await user.login();
-                              // loading.stop();
-                              // ExtendedNavigator.root.push(Routes.homeScreen);
-
-                            },
-                          ),
-                          SpaceW16(),
-                          Container(
-                            margin: EdgeInsets.only(top: tearDropButtonRadius),
-                            child: TearDropButton(
-                              buttonText: StringConst.SIGN_UP,
+        body: LoadingBox(
+          child: Container(
+            child: ListView(
+                children: [ Column(
+                children: [
+                  _drawTearDrop(),
+                  Container(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: Sizes.PADDING_24),
+                    child: _buildForm(),
+                  ),
+                  SpaceH20(),
+                  Container(
+                    height: tearDropButtonRadius * 3,
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TearDropButton(
+                              buttonText: StringConst.SIGN_IN,
                               radius: tearDropButtonRadius,
-                              tearDropAlignment: TearDropAlignment.bottomLeft,
-                              style: PaintingStyle.stroke,
-                              color: AppColors.purpleH,
-                              buttonTextStyle: theme.textTheme.bodyText1.copyWith(
-                                color: AppColors.purpleH,
-                              ),
+                              tearDropAlignment: TearDropAlignment.topRight,
+                              hasShadow: true,
                               //TODO: ontap action
-                              onTap: () {
-                                ExtendedNavigator.root.push(Routes.signUpScreen);
+                              onTap:  ()  async {
+                                if( (user.emailIn).text=='' ||  (user.passwordIn).text==''){
+                                  setState(() {
+                                    visibil=true;
+                                  });
+                                }else{
+                                  setState(() {
+                                    visibil=false;
+                                  });
+                                  loading.start();
+                                  await user.login();
+                                  loading.stop();
+                                  (user.emailIn).clear();
+                                  (user.passwordIn).clear();
+                                }
                               },
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                SpaceH20(),
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    StringConst.DONT_HAVE_AN_ACCOUNT,
-                    style: theme.textTheme.bodyText1.copyWith(
-                      color: AppColors.purpleH,
+                            SpaceW16(),
+                            Container(
+                              margin: EdgeInsets.only(top: tearDropButtonRadius),
+                              child: TearDropButton(
+                                buttonText: StringConst.SIGN_UP,
+                                radius: tearDropButtonRadius,
+                                tearDropAlignment: TearDropAlignment.bottomLeft,
+                                style: PaintingStyle.stroke,
+                                color: AppColors.black50,
+                                buttonTextStyle: theme.textTheme.bodyText1.copyWith(
+                                  color: AppColors.black50,
+                                ),
+                                //TODO: ontap action
+                                onTap: () {
+                                  ExtendedNavigator.root.push(Routes.signUpScreen);
+                                  (user.emailIn).clear();
+                                  (user.passwordIn).clear();
+                                  setState(() {
+                                    visibil = false;
+                                  });
+                                },
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  SpaceH20(),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      StringConst.DONT_HAVE_AN_ACCOUNT,
+                      style: theme.textTheme.bodyText1.copyWith(
+                        color: AppColors.black50,
+                      ),
+                    ),
+                  ),],
+                ),],
             ),
-        ],
           ),
         ),
       ),
@@ -139,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           Container(
-            width: radius * 2,
+            width: radius * 4,
             padding: const EdgeInsets.only(right: Sizes.PADDING_16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -148,13 +168,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text(
                   StringConst.LETS_GET_STARTED,
                   style: theme.textTheme.headline5.copyWith(
-                    color: AppColors.violet400,
+                    color: AppColors.white,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   StringConst.LOGIN_MSG,
                   style: theme.textTheme.bodyText1.copyWith(
-                    color: AppColors.violet400,
+                    color: AppColors.blackFull,
+                    fontWeight: FontWeight.bold,
+                    fontSize: Sizes.SIZE_20,
                   ),
                 ),
               ],
@@ -171,23 +194,33 @@ class _LoginScreenState extends State<LoginScreen> {
 
     TextStyle titleTextStyle = theme.textTheme.subtitle2.copyWith(
       color: AppColors.greenblue,
+      fontSize: Sizes.TEXT_SIZE_20,
     );
+
+    TextStyle textStyle = theme.textTheme.subtitle2.copyWith(
+      color: AppColors.blackFull,
+      fontSize: Sizes.TEXT_SIZE_18,
+    );
+
     TextStyle hintTextStyle = theme.textTheme.bodyText1.copyWith(
-      color: AppColors.purpleH,
+      color: AppColors.black50,
     );
     UnderlineInputBorder customUnderlineInputBorder =
     Borders.customUnderlineInputBorder(
-      color: AppColors.purpleH,
+      color: AppColors.black50,
     );
     return Container(
       child: Column(
         children: [
           CustomTextFormField(
+            // onChanged: () {
+            //
+            // },
             controller:  user.emailIn,
             hasTitle: true,
             titleStyle: titleTextStyle,
             title: StringConst.EMAIL,
-            textStyle: hintTextStyle,
+            textStyle: textStyle,
             hasPrefixIcon: true,
             prefixIcon: Container(
               transform: Matrix4.translationValues(-10.0, 0.0, 0.0),
@@ -205,11 +238,14 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           SpaceH8(),
           CustomTextFormField(
+            // onChanged: () {
+            //   visibil=false;
+            // },
             controller:  user.passwordIn,
             hasTitle: true,
             title: StringConst.PASSWORD,
             titleStyle: titleTextStyle,
-            textStyle: hintTextStyle,
+            textStyle: textStyle,
             hasPrefixIcon: true,
             prefixIcon: Container(
               transform: Matrix4.translationValues(-10.0, 0.0, 0.0),
@@ -227,15 +263,31 @@ class _LoginScreenState extends State<LoginScreen> {
             hintTextStyle: hintTextStyle,
           ),
           SpaceH16(),
-          InkWell(
-            onTap: () {},
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                StringConst.FORGOT_PASSWORD,
-                style: titleTextStyle,
+          Row(
+            mainAxisAlignment:MainAxisAlignment.spaceBetween,
+            children:[
+              InkWell(
+                onTap: () {},
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    StringConst.FORGOT_PASSWORD,
+                    style: titleTextStyle,
+                  ),
+                ),
               ),
-            ),
+              Visibility(
+                visible: visibil,
+                child: Text(
+                  StringConst.FORGOT,
+                  style: theme.textTheme.bodyText1.copyWith(
+                    color: AppColors.red,
+                    fontSize: Sizes.SIZE_16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ]
           ),
         ],
       ),

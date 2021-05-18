@@ -1,10 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:provider/provider.dart';
 import 'package:wcif_application/controllers/user_controller.dart';
-import 'package:wcif_application/public_models/loading.dart';
 import 'package:wcif_application/widgets/shared/custom_appbar.dart';
 import 'package:wcif_application/widgets/shared/main_menu.dart';
-import 'package:wcif_application/widgets/shared/search_input.dart';
 import 'package:wcif_application/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:wcif_application/widgets/shared/curved_app_bar.dart';
@@ -15,90 +13,114 @@ import 'package:wcif_application/widgets/shared/vertical_text.dart';
 import 'package:wcif_application/widgets/layout/adaptive.dart';
 import 'package:wcif_application/values/values.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:wcif_application/widgets/shared/auto_load.dart';
+import 'file:///C:/Users/ielsh/AndroidStudioProjects/wcif_application/lib/widgets/layout/auto_load.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    var loading = Provider.of<LoadingModel>(context, listen: true);
     var user = Provider.of<UserController>(context, listen: true);
-
     TextStyle subtitleTextStyle = theme.textTheme.bodyText1.copyWith(
       color: AppColors.white,
       fontSize: Sizes.TEXT_SIZE_14,
     );
     return AutoLoad(
       onInit: () async {
-        // BotToast.showLoading();
-        await user.loadQustionsProfile();
-        // BotToast.closeAllLoading();
+        await user.getUserQuestions(user.user.id);
+        await user.getFollowings();
       },
       child: Scaffold(
-        backgroundColor: AppColors.purpleL,
+        backgroundColor: AppColors.white,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(Sizes.HEIGHT_56),
-          child: CustomAppBar(),
+          child: CustomAppBar(
+            hasTitle: true,
+            title: "صفحتي الشخصية",
+          ),
         ),
         drawer: MainMenu(),
-        body: LoadingBox(
-          child: Stack(
-            children: [
-              ListView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Sizes.PADDING_16,
-                  vertical: Sizes.PADDING_16,
+        body: Stack(
+          children: [
+            ListView(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.PADDING_16,
+                vertical: Sizes.PADDING_16,
+              ),
+              shrinkWrap: true,
+              children: [
+                SizedBox(
+                  height: assignHeight(context: context, fraction: 0.49),
                 ),
-                shrinkWrap: true,
-                children: [
-                  SizedBox(
-                    height: assignHeight(context: context, fraction: 0.55),
-                  ),
-                  // _buildListCards(context),
-                  user.ProfileState == 0
-                      ? Container()
-                      : user.ProfileState == 1
-                      ? ListView.builder(
+                user.ProfileState == 0 ?
+                Column(
+                    children: [
+                      Text(
+                        StringConst.INLOAD,
+                        style: theme.textTheme.bodyText1.copyWith(
+                          color: AppColors.blackFull,
+                          fontSize:Sizes.SIZE_20,
+                        ),
+                      ),
+                      Image.asset(ImagePath.LOAD)
+                    ])
+                    : user.ProfileState == 1 ?
+                  ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: user.qustionsProfileList.length,
-                    itemBuilder: (context, index) {
+                    itemCount: user.qustionsProfileList.length, itemBuilder: (context, index) {
                       return _buildListCards(context,index,user);
-                    },
+                      },
                   )
-                      : user.ProfileState == 2
-                      ? Container(
-                    child: Text("حدث خطأ ما"),
-                  )
-                      : Container(),
-                ],
-              ),
-              CurvedContainer(
-                backgroundColor: AppColors.primaryColor,
-                bottomLeftRadius: Sizes.RADIUS_80,
-                height: assignHeight(context: context, fraction: 0.525),
-                child: Column(
-                  children: [
+                    : user.ProfileState == 2 ?
+                Container(
+                  child: Text(
+                    StringConst.PROBLEM_IN_LOAD,
+                    style: theme.textTheme.bodyText1.copyWith(
+                      color: AppColors.blackFull,
+                      fontSize:Sizes.SIZE_20,
+                    ),
+                  ),
+                )
+                    : Container(),
+              ],
+            ),
+            CurvedContainer(
+              backgroundColor: AppColors.greenblue2,
+              bottomLeftRadius: Sizes.RADIUS_80,
+              height: assignHeight(context: context, fraction: 0.495),
+              child: Column(
+                children: [
                     Spacer(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         VerticalText(
-                          //TODO///////////////////////////////////////////////
-                          title: StringConst.NUMBER_OF_FOLLOWERS,
-                          subtitle: StringConst.FOLLOWERS,
-                          subtitleTextStyle: subtitleTextStyle,
-                        ),
-                        VerticalText(
-                          //TODO////////////////////////////////////////////
-                          title: StringConst.NUMBER_OF_FOLLOWING,
+                          onPressed: (){
+                            ExtendedNavigator.root.push(Routes.followingScreen);
+                          },
+                          title: user.Followings==0 ? "_" : user.Followings == 1 ?  user.followingsList.length.toString() :"0",
                           subtitle: StringConst.FOLLOWING,
                           subtitleTextStyle: subtitleTextStyle,
                         ),
                         VerticalText(
-                          //TODO////////////////////////////////////////////
-                          title:"3",
-                          subtitle: StringConst.Questions,
+                          onPressed: (){
+                            ExtendedNavigator.root.push(Routes.userAnswersScreen);
+                          },
+                          title: "0",
+                          subtitle: StringConst.ANSWERS,
+                          subtitleTextStyle: subtitleTextStyle,
+                        ),
+                        VerticalText(
+                          onPressed: (){
+                            ExtendedNavigator.root.push(Routes.userQuestionsScreen);
+                          },
+                          title:user.ProfileState==0 ? "_" : user.ProfileState == 1 ?  user.qustionsProfileList.length.toString() :"0",
+                          subtitle: StringConst.QUESTIONS,
                           subtitleTextStyle: subtitleTextStyle,
                         )
                       ],
@@ -110,8 +132,8 @@ class ProfileScreen extends StatelessWidget {
               CurvedAppBar(
                 backgroundColor: AppColors.white,
                 hasTrailing: true,
-                iconColor: AppColors.violet400,
-                height: assignHeight(context: context, fraction: 0.4),
+                iconColor: AppColors.grey2,
+                height: assignHeight(context: context, fraction: 0.37),
                 bottomLeftRadius: Sizes.RADIUS_80,
                 title: Column(
                   children: [
@@ -125,11 +147,20 @@ class ProfileScreen extends StatelessWidget {
                     VerticalText(
                       title: user.user.firstName + " " +  user.user.lastName,
                       titleTextStyle: theme.textTheme.headline5.copyWith(
-                        color: AppColors.violet400,
+                        color: AppColors.blackFull,
+                        fontSize: Sizes.SIZE_24,
                       ),
-                      subtitle:  user.user.phone +"/"+ user.user.email,
+                      subtitle:  user.user.phone ,
                       subtitleTextStyle: theme.textTheme.bodyText1.copyWith(
-                        color: AppColors.purpleH,
+                        color: AppColors.black60,
+                        fontSize: Sizes.SIZE_20,
+                      ),
+                    ),
+                    Text(
+                      user.user.email,
+                      style: theme.textTheme.headline5.copyWith(
+                        color: AppColors.black60,
+                        fontSize: Sizes.SIZE_20,
                       ),
                     )
                   ],
@@ -137,9 +168,8 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
           ),
-        ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: AppColors.greenblue,
           //TODO:Screen ADD Q
           onPressed: () {
             ExtendedNavigator.root.push(Routes.questionCategoryScreen);
@@ -157,14 +187,18 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildListCards(BuildContext  context,int index,UserController user) {
     ThemeData theme = Theme.of(context);
     TextStyle headingStyle = theme.textTheme.subtitle2.copyWith(
-      color: AppColors.white,
+      color: AppColors.blackFull,
+      fontSize: Sizes.TEXT_SIZE_14,
+      fontWeight: FontWeight.bold,
     );
     TextStyle contentStyle = theme.textTheme.bodyText1.copyWith(
-      color: AppColors.purpleL,
-      fontSize: Sizes.TEXT_SIZE_14,
+      color: AppColors.blackFull,
+      fontSize: Sizes.TEXT_SIZE_16,
+      fontWeight: FontWeight.bold,
     );
     TextStyle iconTextStyle = theme.textTheme.subtitle1.copyWith(
-      color: AppColors.purpleL,
+      color: AppColors.blackFull,
+      fontWeight: FontWeight.bold,
     );
 
     return Column(
@@ -172,22 +206,28 @@ class ProfileScreen extends StatelessWidget {
         QuestionPostCard(
           headMainAxisAlignment: MainAxisAlignment.start,
           footerMainAxisAlignment: MainAxisAlignment.end,
-          height: assignHeight(context: context, fraction: 0.35),
-          padding: const EdgeInsets.all(Sizes.PADDING_16),
-          color: AppColors.violet200,
+          padding: const EdgeInsets.all(Sizes.PADDING_12),
+          color: AppColors.greenligth,
           profileImagePath: ImagePath.MEN,
-          title: user.qustionsProfileList[index].auther,
-          content: user.qustionsProfileList[index].questionTitle+' '+user.qustionsProfileList[index].questionContent,
+          auther: user.qustionsProfileList[index].LoginName,
+          quationsTitel: user.qustionsProfileList[index].QuestionTitle,
+          quationsContent: user.qustionsProfileList[index].QuestionContent,
+          categoryName: user.qustionsProfileList[index].CategoryName,
           contentTextAlign: TextAlign.center,
           hasImage: true,
           contentImagePath: ImagePath.BREAKFAST,
-          subTitle:  user.qustionsProfileList[index].date,
+          date: user.qustionsProfileList[index].CreatedOn.toString().replaceRange(10, user.qustionsProfileList[index].CreatedOn.toString().length, ""),
           titleStyle: headingStyle,
           subtitleStyle: contentStyle,
           contentStyle: contentStyle,
           iconTextStyle: iconTextStyle,
-          iconColor: AppColors.purpleH,
-          canShare: false,
+          iconColor: AppColors.black50,
+          //onCommentsTap: ,
+          numberOfComments: "0",
+          // onDownVote: ,
+          numberOfDownVotes: "0",
+          // onUpVote: ,
+          numberOfUpVotes: "0",
         ),
         SpaceH16(),
       ]

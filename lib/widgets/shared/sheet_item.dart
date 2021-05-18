@@ -64,10 +64,10 @@ class SheetItem extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     TextStyle titleStyle = theme.textTheme.headline6;
     TextStyle contentStyle = theme.textTheme.bodyText1.copyWith(
-      color: AppColors.purple100,
+      color: AppColors.grey,
     );
     TextStyle actionStyle = theme.textTheme.subtitle1.copyWith(
-      color: AppColors.violet400,
+      color: AppColors.grey2,
     );
 
     return Container(

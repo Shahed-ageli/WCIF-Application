@@ -29,7 +29,7 @@ class AlertDialog1 extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     Radius borderRadius = const Radius.circular(Sizes.RADIUS_60);
     return Dialog(
-      backgroundColor: AppColors.violet400,
+      backgroundColor: AppColors.grey2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: borderRadius,
@@ -54,7 +54,7 @@ class AlertDialog1 extends StatelessWidget {
             Text(
               StringConst.LOREM_IPSUM,
               style: theme.textTheme.bodyText2.copyWith(
-                color: AppColors.purpleH,
+                color: AppColors.black50,
               ),
             ),
             Spacer(),
@@ -62,19 +62,19 @@ class AlertDialog1 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 CustomButton(
-                  title: StringConst.SKIP,
+                  title: StringConst.CANCEL,
                   height: Sizes.HEIGHT_44,
                   textStyle: theme.textTheme.subtitle2.copyWith(
                     color: AppColors.white,
                   ),
-                  color: AppColors.purple100,
+                  color: AppColors.grey,
                   onPressed: () => closeDialog(),
                 ),
                 SpaceW8(),
                 CustomButton(
                   title: StringConst.NEXT,
                   height: Sizes.HEIGHT_44,
-                  color: AppColors.primaryColor,
+                  color: AppColors.greenblue2,
                   textStyle: theme.textTheme.subtitle2.copyWith(
                     color: AppColors.white,
                   ),

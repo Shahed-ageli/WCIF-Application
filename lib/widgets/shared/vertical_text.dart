@@ -7,8 +7,10 @@ class VerticalText extends StatelessWidget {
     this.subtitle,
     this.titleTextStyle,
     this.subtitleTextStyle,
+    this.onPressed,
   });
 
+  final VoidCallback onPressed;
   final String title;
   final String subtitle;
   final TextStyle titleTextStyle;
@@ -19,17 +21,20 @@ class VerticalText extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return Column(
       children: [
-        Text(
-          title,
-          style: titleTextStyle ??
-              theme.textTheme.headline6.copyWith(
-                color: AppColors.white,
-              ),
+        TextButton(
+          onPressed: onPressed,
+          child: Text(
+            title,
+            style: titleTextStyle ??
+                theme.textTheme.headline6.copyWith(
+                  color: AppColors.white,
+                ),
+          ),
         ),
         Text(
           subtitle,
           style: subtitleTextStyle ??
-              theme.textTheme.subtitle1.copyWith(color: AppColors.purpleH),
+              theme.textTheme.subtitle1.copyWith(color: AppColors.black50),
         ),
       ],
     );

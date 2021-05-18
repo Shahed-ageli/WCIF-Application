@@ -20,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool hasTitleIcon;
   final Widget titleIcon;
   final TextInputType textInputType;
-  final ValueChanged<String> onChanged;
+  // final Function() onChanged;
   final FormFieldValidator<String> validator;
   final List<TextInputFormatter> inputFormatters;
   final InputBorder border;
@@ -53,12 +53,12 @@ class CustomTextFormField extends StatelessWidget {
     this.hasSuffixIcon = false,
     this.obscured = false,
     this.textInputType,
-    this.onChanged,
     this.validator,
     this.inputFormatters,
     this.width,
     this.height,
     this.controller,
+    // this.onChanged,
   });
 
   @override
@@ -81,7 +81,7 @@ class CustomTextFormField extends StatelessWidget {
             style: textStyle,
             controller: controller,
             keyboardType: textInputType,
-            onChanged: onChanged,
+            // onChanged: onChanged(),
             validator: validator,
             inputFormatters: inputFormatters,
             decoration: InputDecoration(

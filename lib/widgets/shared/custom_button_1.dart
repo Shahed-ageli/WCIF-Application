@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     this.height = Sizes.HEIGHT_50,
     this.elevation = Sizes.ELEVATION_1,
     this.borderRadius = Sizes.RADIUS_24,
-    this.color = AppColors.black,
+    this.color = AppColors.blackFull,
     this.borderSide = Borders.defaultPrimaryBorder,
     this.textStyle,
     this.icon,
