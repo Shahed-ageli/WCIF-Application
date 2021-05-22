@@ -66,7 +66,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
       fontWeight: FontWeight.bold,
     );
     TextStyle textStyle = theme.textTheme.subtitle2.copyWith(
-      color: AppColors.blackFull,
+      color: AppColors.black,
       fontSize: Sizes.TEXT_SIZE_18,
     );
     TextStyle hintTextStyle = theme.textTheme.bodyText1.copyWith(

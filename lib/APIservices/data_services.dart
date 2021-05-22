@@ -7,16 +7,13 @@ class DataApi {
   Future<dynamic> login(String email, String password) async {
     try {
       var response = await http.post(Uri.parse(baseUrl + 'auth/login'),
-          body: {'Email': email, 'Password': password});
-      var jsonData = json.decode(response.body);
-      if (jsonData['message'] == "login successfull." && jsonData['user']['UserType']!= 9) {
-        print("welcome User");
-        return jsonData;
-      } else if(jsonData['user']['UserType']==1){
-        print("your admin login on dashbord");
-      } else{
-
-        return null;
+          body: {'Email': email, 'Password': password}
+          );
+      if(response.statusCode==200){
+        var jsonData = json.decode(response.body);
+        if (jsonData['message'] == "login successfull.") {
+          return jsonData;
+        }
       }
     } on Exception catch (_) {
       print(_);
@@ -34,7 +31,7 @@ class DataApi {
             'Email': email,
             'Password': password,
             'Phone': phone,
-            'UserType': "2",
+            // 'UserType': "0",
           });
       var jsonData = json.decode(response.body);
       if ([jsonData['rowsAffected']].length == 1) {

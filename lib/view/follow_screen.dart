@@ -85,7 +85,7 @@ class _FollowingScreenState extends State<FollowingScreen> {
                             Text(
                               StringConst.INLOAD,
                               style: theme.textTheme.bodyText1.copyWith(
-                                color: AppColors.blackFull,
+                                color: AppColors.black,
                                 fontSize:Sizes.SIZE_20,
                               ),
                             ),
@@ -122,7 +122,7 @@ class _FollowingScreenState extends State<FollowingScreen> {
                         child: Text(
                           StringConst.PROBLEM_IN_LOAD,
                           style: theme.textTheme.bodyText1.copyWith(
-                            color: AppColors.blackFull,
+                            color: AppColors.black,
                             fontSize:Sizes.SIZE_20,
                           ),
                         ),
@@ -134,7 +134,7 @@ class _FollowingScreenState extends State<FollowingScreen> {
                             Text(
                               StringConst.INLOAD,
                               style: theme.textTheme.bodyText1.copyWith(
-                                color: AppColors.blackFull,
+                                color: AppColors.black,
                                 fontSize:Sizes.SIZE_20,
                               ),
                             ),
@@ -171,7 +171,7 @@ class _FollowingScreenState extends State<FollowingScreen> {
                         child: Text(
                           StringConst.PROBLEM_IN_LOAD,
                           style: theme.textTheme.bodyText1.copyWith(
-                            color: AppColors.blackFull,
+                            color: AppColors.black,
                             fontSize:Sizes.SIZE_20,
                           ),
                         ),
