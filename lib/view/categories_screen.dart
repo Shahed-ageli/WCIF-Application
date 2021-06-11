@@ -1,9 +1,7 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wcif_application/controllers/user_controller.dart';
-import 'file:///C:/Users/ielsh/AndroidStudioProjects/wcif_application/lib/widgets/layout/auto_load.dart';
+import 'package:wcif_application/widgets/layout/auto_load.dart';
 import 'package:wcif_application/widgets/shared/custom_appbar.dart';
 import 'package:wcif_application/widgets/shared/main_menu.dart';
 import 'package:wcif_application/widgets/shared/category_card.dart';
@@ -16,28 +14,16 @@ class CategoriesScreen extends StatefulWidget {
   _CategoriesScreenState createState() => _CategoriesScreenState();
 }
 
-const Map<String,String> Images = {
-  "مطاعم ":CategoryImage.resturant,
-  "الاطباء":CategoryImage.doctors,
-  "التعليم":CategoryImage.student,
-  "صيدليات ومستشفيات":CategoryImage.medical,
-  "محلات واسواق": CategoryImage.shopping2,
-  "طبخ": CategoryImage.cooking,
-  "رياضة":CategoryImage.sport,
-  "الالعاب":CategoryImage.game,
-  "الحيوانات":CategoryImage.animal,
-  "الالكترونيات": CategoryImage.devices,
-  "برمجة": CategoryImage.programming2,
-};
-
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    var user = Provider.of<UserController>(context, listen: true);
+    var category = Provider.of<UserController>(context, listen: true);
     return AutoLoad(
       onInit: () async {
-        await user.getCategory();
+        await category.getCategory();
+        await category.getModeratorCategory();
+        categoryData.CategoryShowed.clear();
       },
       child: DefaultTabController(
         length: 2,
@@ -59,15 +45,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SpaceH12(),
-                Text(
-                  StringConst.SEARCH_CATEGORY,
-                  style: theme.textTheme.bodyText1.copyWith(
-                    color: AppColors.greenblue,
-                    fontSize: Sizes.TEXT_SIZE_20,
-                  ),
+                SearchInput(
+                  controller: category.searchCategoryController,
+                  title:StringConst.SEARCH_CATEGORY ,
                 ),
-                SpaceH12(),
-                SearchInput(),
                 SpaceH12(),
                 Text(
                   StringConst.CATEGORIES,
@@ -97,64 +78,127 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ),
                 Expanded(
                   child: TabBarView(
+                    physics: NeverScrollableScrollPhysics(),
                     children: [
-                      user.CategortState == 0?
-                      Column(
-                          children: [
-                            Text(
-                              StringConst.INLOAD,
-                              style: theme.textTheme.bodyText1.copyWith(
-                                color: AppColors.blackFull,
-                                fontSize: Sizes.SIZE_20,
+                      ////////////////////////////////////////first Tap
+                      category.categoryState == 0 ?
+                      SingleChildScrollView(
+                        child: Column(
+                            children: [
+                              Text(
+                                StringConst.INLOAD,
+                                style: theme.textTheme.headline5.copyWith(
+                                  color: AppColors.bluegreen,
+                                  fontSize: Sizes.TEXT_SIZE_28,
+                                ),
                               ),
-                            ),
-                            Image.asset(ImagePath.LOAD)
-                          ])
-                          : user.CategortState == 1 ?
+                              Image.asset(
+                                ImagePath.LOAD,
+                                fit: BoxFit.fill,
+                              ),
+                            ]
+                        ),
+                      )
+                          : category.categoryState == 1 ?
                       ListView.separated(
                         scrollDirection: Axis.vertical,
-                        itemCount: user.categoryList.length,
+                        itemCount: category.categoryList.length,
                         padding: EdgeInsets.only(top: Sizes.PADDING_16),
                         shrinkWrap: true,
                         itemBuilder: (BuildContext context, int index) {
                           return CategoryCard(
-                            hasImg: (Images[user.categoryList[index].CategoryName])==null ?  false:true ,
-                            imagePath: Images[user.categoryList[index].CategoryName],
-                            name: user.categoryList[index].CategoryName,
-                            description:user.categoryList[index].Description,
-                            Questions: 2,
-
+                            hasImg: (CategoryImages.Images[category.categoryList[index].CategoryName]) == null ?false:true,
+                            imagePath: CategoryImages.Images[category.categoryList[index].CategoryName],
+                            name: category.categoryList[index].CategoryName,
+                            description:category.categoryList[index].Description,
+                            id: category.categoryList[index].Id,
+                            bottonText: StringConst.SHOW,
                           );
                         },
                         separatorBuilder: (BuildContext context, int index) {
                           return SpaceH12();
                         },
                       )
-                          : user.CategortState == 2 ?
+                          : category.categoryState == 2 ?
                       Container(
                         child: Text(
                           StringConst.PROBLEM_IN_LOAD,
                           style: theme.textTheme.bodyText1.copyWith(
-                            color: AppColors.blackFull,
+                            color: AppColors.black,
                             fontSize: Sizes.SIZE_20,
                           ),
                         ),
                       )
                           : Container(),
-                      Column(
-                        children: [
-                          SpaceH20(),
-                          Center(
-                            child: Text(
+                      ////////////////////////////////////////////// second tap
+                      category.isModerator==false && category.moderatorState == 1 ?
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SpaceH20(),
+                            Text(
                               StringConst.NOT_MODERATOR_IN_ANY_CATEGORR,
                               style: theme.textTheme.headline5.copyWith(
                                 color: AppColors.bluegreen,
                                 fontSize: Sizes.TEXT_SIZE_28,
                               ),
                             ),
+                            Image.asset(
+                              ImagePath.MODERATOER,
+                              fit: BoxFit.fill,
+                            ),
+                          ],
+                        ),
+                      )
+                      :category.moderatorState == 0 ?
+                      Column(
+                          children: [
+                            Text(
+                              StringConst.INLOAD,
+                              style: theme.textTheme.headline5.copyWith(
+                                color: AppColors.bluegreen,
+                                fontSize: Sizes.TEXT_SIZE_28,
+                              ),
+                            ),
+                            Image.asset(
+                              ImagePath.LOAD,
+                              fit: BoxFit.fill,
+                            ),
+                          ]
+                      )
+                          : category.isModerator==true && category.moderatorState == 1 ?
+                      ListView.separated(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: category.moderatorCategoryDescriptionList.length,
+                        padding: EdgeInsets.only(top: Sizes.PADDING_16),
+                        shrinkWrap: true,
+                        itemBuilder: (BuildContext context, int index) {
+                          return CategoryCard(
+                            hasImg: (CategoryImages.Images[category.moderatorCategoryDescriptionList[index].CategoryName]) == null ?false:true,
+                            imagePath: CategoryImages.Images[category.moderatorCategoryDescriptionList[index].CategoryName],
+                            name: category.moderatorCategoryDescriptionList[index].CategoryName,
+                            description:category.moderatorCategoryDescriptionList[index].Description,
+                            id: category.moderatorCategoryDescriptionList[index].Id,
+                            bottonText: StringConst.SHOW_QUESTION_REQ,
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SpaceH12();
+                        },
+                      )
+
+                          : category.moderatorState == 2 ?
+                      Container(
+                        child: Text(
+                          StringConst.PROBLEM_IN_LOAD,
+                          style: theme.textTheme.bodyText1.copyWith(
+                            color: AppColors.black,
+                            fontSize: Sizes.SIZE_20,
                           ),
-                        ],
-                      ),
+                        ),
+                      )
+                          : Container(),
                     ],
                   ),
                 ),

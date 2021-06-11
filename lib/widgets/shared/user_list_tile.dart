@@ -98,8 +98,12 @@ class _CustomListTileState extends State<CustomListTile> {
   void _toggleFollowButton(UserController follow, String Id) {
     if(isFollowing){
       follow.unFollowUser(Id);
+      follow.getFollowers();
+      follow.getFollowings();
     }else{
       follow.followUser(Id);
+      follow.getFollowers();
+      follow.getFollowings();
     }
     setState(() {
       isFollowing = !isFollowing;
